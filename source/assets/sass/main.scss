@@ -295,12 +295,12 @@
 
 		p {
 			font-size: 1.25em;
-			margin: 0.75em 0 0.25em 0;
+			margin: 0.75em 0 0.25em;
 			opacity: 0.75;
 		}
 
 		nav {
-			margin: 1.5em 0 0 0;
+			margin: 1.5em 0 0;
 
 			li {
 				@include vendor('animation', 'nav-icons #{_duration(nav-icons)} ease-in-out forwards');
