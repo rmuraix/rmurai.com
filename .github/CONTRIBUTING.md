@@ -13,7 +13,7 @@ Pull requests are great. Here's a quick guide:
 1. Fork the repo on github.  
 2. Make a new branch.  
 3. Test your code and commits changes.
-4. Push to your fork and submit a pull request against `Develop`  
+4. Push to your fork and submit a pull request against `main`  
 5. Wait for review.  
 
 Suggestions for improvements or alternative ideas may happen.  
