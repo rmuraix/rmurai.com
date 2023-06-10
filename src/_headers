@@ -1,4 +1,0 @@
-/*
-  X-Frame-Options: DENY
-  Content-Security-Policy: default-src 'self' ajax.cloudflare.com; script-src 'self' 'unsafe-inline' static.cloudflareinsights.com; connect-src 'self' cloudflareinsights.com; style-src 'self' 'unsafe-inline'; img-src 'self';
-  
