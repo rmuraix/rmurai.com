@@ -1,7 +1,11 @@
 import "./globals.css";
-import { Inter } from "next/font/google";
+import { Noto_Sans_JP } from "@next/font/google";
 
-const inter = Inter({ subsets: ["latin"] });
+const notojp = Noto_Sans_JP({
+  weight: ["400"],
+  subsets: ["latin"],
+  display: "swap",
+});
 
 export const metadata = {
   title: {
@@ -41,7 +45,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={inter.className}>{children}</body>
+      <body className={notojp.className}>{children}</body>
     </html>
   );
 }
