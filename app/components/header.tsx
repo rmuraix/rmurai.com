@@ -1,4 +1,4 @@
-"use client";
+import Link from "next/link";
 
 export default function Header() {
   return (
@@ -10,18 +10,18 @@ export default function Header() {
               rmuraix
             </span>
             <div className="flex space-x-4 text-gray-900 dark:text-white">
-              <a
+              <Link
                 href="/"
                 className="hover:text-neutral-600 dark:hover:text-neutral-200"
               >
                 home
-              </a>
-              <a
-                href="works"
+              </Link>
+              <Link
+                href="/works"
                 className="hover:text-neutral-600 dark:hover:text-neutral-200"
               >
                 works
-              </a>
+              </Link>
             </div>
           </div>
         </div>
