@@ -3,7 +3,7 @@ import { IconProp, config } from "@fortawesome/fontawesome-svg-core";
 import "@fortawesome/fontawesome-svg-core/styles.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faGithub, faLinkedin } from "@fortawesome/free-brands-svg-icons";
-import { languagesFrameworks } from "@/lib/skills";
+import { languagesFrameworks } from "@/libs/skills";
 import warehouse from "public/images/warehouse.jpg";
 import eno from "public/images/eno.jpg";
 import film from "public/images/film.jpg";
