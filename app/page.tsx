@@ -3,6 +3,7 @@ import { IconProp, config } from "@fortawesome/fontawesome-svg-core";
 import "@fortawesome/fontawesome-svg-core/styles.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faGithub, faLinkedin } from "@fortawesome/free-brands-svg-icons";
+import { languagesFrameworks } from "@/lib/skills";
 config.autoAddCss = false;
 
 function ArrowIcon() {
@@ -67,10 +68,30 @@ export default function Home() {
         />
         <SocialLink
           icon={faLinkedin}
-          name="Linkdin"
+          name="Linkedin"
           link="https://www.linkedin.com/in/rmurai/"
           username="@rmurai"
         />
+      </div>
+      <h2 className="mb-4 text-xl font-bold tracking-tighter">Skills</h2>
+      <p>
+        I am not claiming to be a master in all of these skills, that would be
+        amazing, but it is simply not true.
+      </p>
+      <h3 className="mt-4 text-xl tracking-tighter">Languages / Frameworks</h3>
+      <div className="my-2 flex flex-row flex-wrap">
+        {languagesFrameworks.map((name, index) => {
+          return (
+            <>
+              <div
+                key={index}
+                className="m-1 flex items-center justify-between rounded border border-neutral-200 bg-neutral-50 bg-opacity-50 px-3 py-2 dark:border-neutral-700 dark:bg-neutral-800"
+              >
+                <p>{name}</p>
+              </div>
+            </>
+          );
+        })}
       </div>
     </main>
   );
