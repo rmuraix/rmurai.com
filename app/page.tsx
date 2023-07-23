@@ -112,6 +112,53 @@ export default function Home() {
           );
         })}
       </div>
+      <h2 className="my-8 text-xl font-bold tracking-tighter">
+        Qualifications
+      </h2>
+      <ul className="font-sm mt-8 flex flex-col space-x-0 space-y-2 text-neutral-600 dark:text-neutral-300">
+        <li>
+          <a
+            className="flex items-center transition-all hover:text-neutral-800 dark:hover:text-neutral-100"
+            rel="noopener noreferrer"
+            target="_blank"
+            href="https://www.credly.com/badges/c695749d-2518-40bb-94c6-e57d717e0d78/public_url"
+          >
+            <p className="mr-2 h-7">
+              AZ-900 Microsoft Azure Fundamentals (June 2023)
+            </p>
+            <ArrowIcon />
+          </a>
+        </li>
+        <li>
+          <a
+            className="flex items-center transition-all hover:text-neutral-800 dark:hover:text-neutral-100"
+            rel="noopener noreferrer"
+            target="_blank"
+            href="https://www.credly.com/badges/3ebacfb9-149f-4dfc-ad6a-bbd53720581e/public_url"
+          >
+            <p className="mr-2 h-7">SC-900 (June 2023)</p>
+            <ArrowIcon />
+          </a>
+        </li>
+        <li>
+          <a
+            className="flex items-center transition-all hover:text-neutral-800 dark:hover:text-neutral-100"
+            rel="noopener noreferrer"
+            target="_blank"
+            href="https://www.openbadge-global.com/ns/portal/openbadge/public/assertions/detail/UjdOOTJ4TmxwUE1neTBJb0ovQm9FZz09"
+          >
+            <p className="mr-2 h-7">
+              JDLA Deep Learning for GENERAL (March 2023)
+            </p>
+            <ArrowIcon />
+          </a>
+        </li>
+        <li>
+          <p className="mr-2 h-7">
+            Fundamental Information Technology Engineer Examination (June 2023)
+          </p>
+        </li>
+      </ul>
     </main>
   );
 }
