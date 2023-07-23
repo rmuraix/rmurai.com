@@ -4,6 +4,10 @@ import "@fortawesome/fontawesome-svg-core/styles.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faGithub, faLinkedin } from "@fortawesome/free-brands-svg-icons";
 import { languagesFrameworks } from "@/lib/skills";
+import warehouse from "public/images/warehouse.jpg";
+import eno from "public/images/eno.jpg";
+import film from "public/images/film.jpg";
+
 config.autoAddCss = false;
 
 function ArrowIcon() {
@@ -59,6 +63,21 @@ export default function Home() {
         Hi, I&apos;m rmuraix 👋
       </h1>
       <p>I&apos;m university student and developper from Japan.</p>
+      <div className="my-8 columns-2 gap-4">
+        <div className="relative mb-4 h-fit">
+          <Image
+            alt="photos"
+            src={warehouse}
+            className="rounded-lg object-cover"
+          />
+        </div>
+        <div className="relative mb-4 h-fit sm:mb-12">
+          <Image alt="photos" src={eno} className="rounded-lg object-cover" />
+        </div>
+        <div className="relative mb-4 h-fit">
+          <Image alt="photos" src={film} className="rounded-lg object-cover" />
+        </div>
+      </div>
       <div className="my-8 flex flex-col sm:flex-row">
         <SocialLink
           icon={faGithub}
