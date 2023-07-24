@@ -123,7 +123,7 @@ export default function Home() {
             target="_blank"
             href="https://www.credly.com/badges/c695749d-2518-40bb-94c6-e57d717e0d78/public_url"
           >
-            <p className="mr-2 h-7">
+            <p className="mr-2 h-14 sm:h-7">
               AZ-900 Microsoft Azure Fundamentals (June 2023)
             </p>
             <ArrowIcon />
@@ -136,7 +136,10 @@ export default function Home() {
             target="_blank"
             href="https://www.credly.com/badges/3ebacfb9-149f-4dfc-ad6a-bbd53720581e/public_url"
           >
-            <p className="mr-2 h-7">SC-900 (June 2023)</p>
+            <p className="mr-2 h-14 tracking-tighter sm:h-7">
+              SC-900 Microsoft Security, Compliance, and Identity Fundamentals
+              (June 2023)
+            </p>
             <ArrowIcon />
           </a>
         </li>
@@ -147,14 +150,14 @@ export default function Home() {
             target="_blank"
             href="https://www.openbadge-global.com/ns/portal/openbadge/public/assertions/detail/UjdOOTJ4TmxwUE1neTBJb0ovQm9FZz09"
           >
-            <p className="mr-2 h-7">
+            <p className="mr-2 h-14 sm:h-7">
               JDLA Deep Learning for GENERAL (March 2023)
             </p>
             <ArrowIcon />
           </a>
         </li>
         <li>
-          <p className="mr-2 h-7">
+          <p className="mr-2 h-14 sm:h-7">
             Fundamental Information Technology Engineer Examination (June 2023)
           </p>
         </li>
