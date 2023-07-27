@@ -1,3 +1,4 @@
+import { Analytics } from "@vercel/analytics/react";
 import "./globals.css";
 import { Noto_Sans_JP } from "next/font/google";
 import Header from "./components/header";
@@ -50,6 +51,7 @@ export default function RootLayout({
       <body className={notojp.className}>
         <Header />
         {children}
+        <Analytics />
       </body>
     </html>
   );
