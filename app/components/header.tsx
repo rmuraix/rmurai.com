@@ -16,12 +16,6 @@ export default function Header() {
               >
                 home
               </Link>
-              <Link
-                href="/works"
-                className="hover:text-neutral-600 dark:hover:text-neutral-200"
-              >
-                works
-              </Link>
             </div>
           </div>
         </div>
