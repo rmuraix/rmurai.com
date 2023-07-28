@@ -68,14 +68,28 @@ export default function Home() {
           <Image
             alt="photos"
             src={warehouse}
+            placeholder="blur"
+            priority={true}
             className="rounded-lg object-cover"
           />
         </div>
         <div className="relative mb-4 h-fit sm:mb-12">
-          <Image alt="photos" src={eno} className="rounded-lg object-cover" />
+          <Image
+            alt="photos"
+            src={eno}
+            placeholder="blur"
+            priority={true}
+            className="rounded-lg object-cover"
+          />
         </div>
         <div className="relative mb-4 h-fit">
-          <Image alt="photos" src={film} className="rounded-lg object-cover" />
+          <Image
+            alt="photos"
+            src={film}
+            placeholder="blur"
+            priority={true}
+            className="rounded-lg object-cover"
+          />
         </div>
       </div>
       <div className="my-8 flex flex-col sm:flex-row">
