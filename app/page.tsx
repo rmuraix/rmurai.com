@@ -62,7 +62,7 @@ export default function Home() {
       <h1 className="mb-8 mt-10 text-2xl font-bold tracking-tighter">
         Hi, I&apos;m rmuraix 👋
       </h1>
-      <p>I&apos;m university student and developper from Japan.</p>
+      <p>I&apos;m university student and developer from Japan.</p>
       <div className="my-8 columns-2 gap-4">
         <div className="relative mb-4 h-fit">
           <Image
