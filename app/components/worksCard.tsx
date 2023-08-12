@@ -5,7 +5,7 @@ export default function WorksCard({ id, title, summary }: Article) {
   return (
     <>
       <div>
-        <Link href={`/works/${id}`} className="block p-6">
+        <Link className="block p-6" href={`/works/${id}`}>
           <h5 className="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
             {title}
           </h5>
