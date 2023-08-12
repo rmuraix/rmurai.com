@@ -1,11 +1,7 @@
 import Link from "next/link";
+import { Article } from "@/libs/microcms";
 
-type WorksCard = {
-  id: string;
-  title: string;
-};
-
-export default function WorksCard({ id, title }: WorksCard) {
+export default function WorksCard({ id, title, summary }: Article) {
   return (
     <>
       <div>
@@ -14,8 +10,7 @@ export default function WorksCard({ id, title }: WorksCard) {
             {title}
           </h5>
           <p className="font-normal text-gray-700 dark:text-gray-400">
-            Here are the biggest enterprise technology acquisitions of 2021 so
-            far, in reverse chronological order.
+            {summary}
           </p>
         </Link>
       </div>

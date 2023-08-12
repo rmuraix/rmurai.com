@@ -9,7 +9,15 @@ export default async function Page() {
     <>
       <main className="mx-auto max-w-5xl p-8 sm:p-4">
         {data.contents.map((works) => (
-          <WorksCard key={works.id} id={works.id} title={works.title} />
+          <WorksCard
+            key={works.id}
+            id={works.id}
+            title={works.title}
+            summary={works.summary}
+            body={""}
+            createdAt={""}
+            updatedAt={""}
+          />
         ))}
       </main>
     </>
