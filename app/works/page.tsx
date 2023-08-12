@@ -17,6 +17,7 @@ export default async function Page() {
             body={""}
             createdAt={""}
             updatedAt={""}
+            github={""}
           />
         ))}
       </main>

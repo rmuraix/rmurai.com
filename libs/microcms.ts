@@ -10,6 +10,7 @@ export type Works = {
   title: string;
   summary: string;
   body: string;
+  github: string;
 };
 
 export type Article = Works & MicroCMSContentId & MicroCMSDate;
