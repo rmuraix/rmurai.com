@@ -1,6 +1,7 @@
 import { Metadata } from "next";
 import { getWorksDetail } from "@/libs/microcms";
 import Article from "@/app/components/article";
+import PrimaryButton from "@/app/components/button/primary";
 import Link from "next/link";
 
 type Props = {
@@ -38,6 +39,7 @@ export default async function Page({ params, searchParams }: Props) {
     <>
       <main className="mx-auto max-w-5xl p-8 sm:p-4">
         <Article data={data} />
+        <PrimaryButton name={"View Repo"} />
       </main>
     </>
   );
