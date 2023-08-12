@@ -1,5 +1,5 @@
 import { getWorksList } from "@/libs/microcms";
-import Link from "next/link";
+import WorksCard from "../components/worksCard";
 
 export default async function Page() {
   const data = await getWorksList({
@@ -7,15 +7,11 @@ export default async function Page() {
   });
   return (
     <>
-      <div className="mx-auto max-w-5xl p-8 sm:p-4">
-        <ul>
-          {data.contents.map((works) => (
-            <li key={works.id}>
-              <Link href={`/works/${works.id}`}>{works.title}</Link>
-            </li>
-          ))}
-        </ul>
-      </div>
+      <main className="mx-auto max-w-5xl p-8 sm:p-4">
+        {data.contents.map((works) => (
+          <WorksCard key={works.id} id={works.id} title={works.title} />
+        ))}
+      </main>
     </>
   );
 }
