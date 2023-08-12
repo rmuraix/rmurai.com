@@ -11,14 +11,14 @@ export default function Header() {
             </span>
             <div className="flex space-x-4 text-gray-900 dark:text-white">
               <Link
-                href="/"
                 className="hover:text-neutral-600 dark:hover:text-neutral-200"
+                href="/"
               >
                 home
               </Link>
               <Link
-                href="/works"
                 className="hover:text-neutral-600 dark:hover:text-neutral-200"
+                href="/works"
               >
                 works
               </Link>

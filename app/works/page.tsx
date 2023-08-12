@@ -10,14 +10,14 @@ export default async function Page() {
       <main className="mx-auto min-h-screen max-w-5xl p-8 sm:p-4">
         {data.contents.map((works) => (
           <WorksCard
-            key={works.id}
-            id={works.id}
-            title={works.title}
-            summary={works.summary}
             body={""}
             createdAt={""}
-            updatedAt={""}
             github={""}
+            id={works.id}
+            key={works.id}
+            summary={works.summary}
+            title={works.title}
+            updatedAt={""}
           />
         ))}
       </main>
