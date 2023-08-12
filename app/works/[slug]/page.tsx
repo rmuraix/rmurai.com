@@ -37,7 +37,7 @@ export default async function Page({ params, searchParams }: Props) {
   });
   return (
     <>
-      <main className="mx-auto max-w-5xl p-8 sm:p-4">
+      <main className="mx-auto min-h-screen max-w-5xl p-8 sm:p-4">
         <Article data={data} />
         <Link href={data.github} target="_blank">
           <PrimaryButton name={"View Repo"} />

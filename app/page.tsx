@@ -43,7 +43,7 @@ function SocialLink({ icon, link, name, username }: sociallink) {
 }
 export default function Home() {
   return (
-    <main className="mx-auto max-w-5xl p-8 sm:p-4">
+    <main className="mx-auto min-h-screen max-w-5xl p-8 sm:p-4">
       <h1 className="mb-8 mt-10 text-2xl font-bold tracking-tighter">
         Hi, I&apos;m rmuraix 👋
       </h1>
