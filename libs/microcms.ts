@@ -8,6 +8,7 @@ import { notFound } from "next/navigation";
 
 export type Works = {
   title: string;
+  summary: string;
   body: string;
 };
 
