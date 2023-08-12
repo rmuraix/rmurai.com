@@ -1,8 +1,8 @@
 import { Metadata } from "next";
-import { getWorksDetail } from "@/libs/microcms";
+import Link from "next/link";
 import Article from "@/app/components/article";
 import PrimaryButton from "@/app/components/button/primary";
-import Link from "next/link";
+import { getWorksDetail } from "@/libs/microcms";
 
 type Props = {
   params: {

@@ -1,12 +1,12 @@
-import Image from "next/image";
 import { IconProp, config } from "@fortawesome/fontawesome-svg-core";
 import "@fortawesome/fontawesome-svg-core/styles.css";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faGithub, faLinkedin } from "@fortawesome/free-brands-svg-icons";
-import { languagesFrameworks } from "@/libs/skills";
-import warehouse from "public/images/warehouse.jpg";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import Image from "next/image";
 import eno from "public/images/eno.jpg";
 import film from "public/images/film.jpg";
+import warehouse from "public/images/warehouse.jpg";
+import { languagesFrameworks } from "@/libs/skills";
 import ArrowIcon from "./components/icon/arrow";
 
 config.autoAddCss = false;
