@@ -1,10 +1,10 @@
 import { createClient } from "microcms-js-sdk";
+import { notFound } from "next/navigation";
 import type {
   MicroCMSQueries,
   MicroCMSDate,
   MicroCMSContentId,
 } from "microcms-js-sdk";
-import { notFound } from "next/navigation";
 
 export type Works = {
   title: string;

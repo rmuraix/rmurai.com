@@ -2,39 +2,17 @@ import { Metadata } from "next";
 import Link from "next/link";
 import Article from "@/app/components/article";
 import PrimaryButton from "@/app/components/button/primary";
-import { getWorksDetail } from "@/libs/microcms";
+import { getWorksDetail, getWorksList } from "@/libs/microcms";
 
-type Props = {
-  params: {
-    slug: string;
-  };
-  searchParams: {
-    dk: string;
-  };
-};
-
-export async function generateMetadata({
-  params,
-  searchParams,
-}: Props): Promise<Metadata> {
-  const data = await getWorksDetail(params.slug, {
-    draftKey: searchParams.dk,
-  });
-
-  return {
-    title: data.title,
-    description: data.summary,
-    openGraph: {
-      title: data.title,
-      description: data.summary,
-    },
-  };
+export async function generateStaticParams() {
+  const data = await getWorksList();
+  return data.contents.map((data) => ({
+    slug: data.id,
+  }));
 }
 
-export default async function Page({ params, searchParams }: Props) {
-  const data = await getWorksDetail(params.slug, {
-    draftKey: searchParams.dk,
-  });
+export default async function Page({ params }: { params: { slug: string } }) {
+  const data = await getWorksDetail(params.slug);
   return (
     <>
       <main className="mx-auto min-h-screen max-w-5xl p-8 sm:p-4">
