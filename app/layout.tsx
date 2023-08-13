@@ -15,8 +15,8 @@ export const metadata = {
     template: "%s | rmuraix",
   },
   description: "Student and developer",
+  metadataBase: new URL("https://rmurai.com"),
   openGraph: {
-    metadataBase: new URL("https://rmurai.com"),
     title: "rmuraix",
     description: "Student and developer",
     url: "https://rmurai.com",
