@@ -96,7 +96,7 @@ export default function Home() {
         I am not claiming to be a master in all of these skills, that would be
         amazing, but it is simply not true.
       </p>
-      <h3 className="mt-4 text-xl tracking-tighter">Languages / Frameworks</h3>
+      <h3 className="mt-4 text-lg tracking-tighter">Languages / Frameworks</h3>
       <div className="my-2 flex flex-row flex-wrap">
         {languagesFrameworks.map((name, index) => {
           return (
