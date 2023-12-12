@@ -3,11 +3,11 @@ import "@fortawesome/fontawesome-svg-core/styles.css";
 import { faGithub, faLinkedin } from "@fortawesome/free-brands-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Image from "next/image";
-import eno from "public/images/eno.jpg";
-import film from "public/images/film.jpg";
-import warehouse from "public/images/warehouse.jpg";
-import { languagesFrameworks } from "@/libs/skills";
+import eno from "/public/images/eno.jpg";
+import film from "/public/images/film.jpg";
+import warehouse from "/public/images/warehouse.jpg";
 import ArrowIcon from "./components/icon/arrow";
+import { languagesFrameworks } from "@/libs/skills";
 
 config.autoAddCss = false;
 
