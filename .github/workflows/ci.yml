@@ -19,4 +19,14 @@ jobs:
       - name: Lint
         run: npm run lint
       - name: check code format
+        if: github.event_name != 'pull_request'
         run: npm run format:check
+      - name: Format code
+        if: github.event_name == 'pull_request'
+        run: npm run format:fix
+      - name: Commit changes
+        if: github.event_name == 'pull_request'
+        uses: stefanzweifel/git-auto-commit-action@v5
+        with:
+          commit_message: "Format code with prettier"
+          commit_options: "--no-verify"
