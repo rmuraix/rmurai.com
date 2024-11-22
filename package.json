@@ -25,7 +25,7 @@
     "eslint": "8.57.1",
     "eslint-config-next": "14.2.18",
     "highlight.js": "^11.10.0",
-    "microcms-js-sdk": "^2.7.0",
+    "microcms-js-sdk": "^3.1.2",
     "next": "14.2.18",
     "postcss": "8.4.49",
     "react": "18.3.1",
