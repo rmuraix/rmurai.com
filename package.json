@@ -24,7 +24,7 @@
     "cheerio": "^1.0.0",
     "eslint": "8.57.1",
     "eslint-config-next": "14.2.21",
-    "highlight.js": "^11.11.0",
+    "highlight.js": "^11.11.1",
     "microcms-js-sdk": "^3.1.2",
     "next": "14.2.21",
     "postcss": "8.4.49",
