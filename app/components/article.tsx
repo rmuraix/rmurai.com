@@ -8,7 +8,7 @@ type Props = {
 export default function Article({ data }: Props) {
   return (
     <>
-      <h1 className="mb-8 mt-10 text-2xl font-bold tracking-tighter">
+      <h1 className="mt-10 mb-8 text-2xl font-bold tracking-tighter">
         {data.title}
       </h1>
       <p className="mb-10">{data.summary}</p>

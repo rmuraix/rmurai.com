@@ -20,7 +20,7 @@ type sociallink = {
 function SocialLink({ icon, link, name, username }: sociallink) {
   return (
     <a
-      className="m-2 flex w-full items-center justify-between rounded border border-neutral-200 bg-neutral-50 bg-opacity-50 px-3 py-4 dark:border-neutral-700 dark:bg-neutral-800"
+      className="bg-opacity-50 m-2 flex w-full items-center justify-between rounded border border-neutral-200 bg-neutral-50 px-3 py-4 dark:border-neutral-700 dark:bg-neutral-800"
       href={link}
       target="_blank"
     >
@@ -44,7 +44,7 @@ function SocialLink({ icon, link, name, username }: sociallink) {
 export default function Home() {
   return (
     <main className="mx-auto min-h-screen max-w-5xl p-8 sm:p-4">
-      <h1 className="mb-8 mt-10 text-2xl font-bold tracking-tighter">
+      <h1 className="mt-10 mb-8 text-2xl font-bold tracking-tighter">
         Hi, I&apos;m rmuraix 👋
       </h1>
       <p>I&apos;m university student and developer from Japan.</p>
@@ -102,7 +102,7 @@ export default function Home() {
           return (
             <>
               <div
-                className="m-1 flex items-center justify-between rounded border border-neutral-200 bg-neutral-50 bg-opacity-50 px-3 py-2 dark:border-neutral-700 dark:bg-neutral-800"
+                className="bg-opacity-50 m-1 flex items-center justify-between rounded border border-neutral-200 bg-neutral-50 px-3 py-2 dark:border-neutral-700 dark:bg-neutral-800"
                 key={index}
               >
                 <p>{name}</p>
@@ -114,7 +114,7 @@ export default function Home() {
       <h2 className="my-8 text-xl font-bold tracking-tighter">
         Qualifications
       </h2>
-      <ul className="font-sm mt-8 flex flex-col space-x-0 space-y-2 text-neutral-600 dark:text-neutral-300">
+      <ul className="font-sm mt-8 flex flex-col space-y-2 space-x-0 text-neutral-600 dark:text-neutral-300">
         <li>
           <a
             className="flex items-center transition-all hover:text-neutral-800 dark:hover:text-neutral-100"
