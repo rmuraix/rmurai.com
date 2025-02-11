@@ -1,42 +1,30 @@
 {
-  "name": "rmurai.com",
-  "version": "0.1.0",
-  "private": true,
+  "name": "portfolio",
+  "type": "module",
+  "version": "0.0.1",
   "scripts": {
-    "dev": "next dev",
-    "build": "next build",
-    "start": "next start",
-    "lint": "next lint",
-    "lint:fix": "next lint --fix",
-    "format:check": "npx prettier . --check",
-    "format:fix": "npx prettier . --write"
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "astro": "astro",
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
+    "biome": "biome check .",
+    "biome:write": "biome check --write ."
   },
   "dependencies": {
-    "@fortawesome/fontawesome-svg-core": "^6.7.2",
-    "@fortawesome/free-brands-svg-icons": "^6.7.2",
-    "@fortawesome/free-solid-svg-icons": "^6.7.2",
-    "@fortawesome/react-fontawesome": "^0.2.2",
-    "@types/node": "20.17.16",
-    "@types/react": "18.3.18",
-    "@types/react-dom": "18.3.5",
-    "@vercel/analytics": "^1.4.1",
-    "autoprefixer": "10.4.20",
-    "cheerio": "^1.0.0",
-    "eslint": "8.57.1",
-    "eslint-config-next": "14.2.23",
-    "highlight.js": "^11.11.1",
-    "microcms-js-sdk": "^3.1.2",
-    "next": "14.2.23",
-    "postcss": "8.5.1",
-    "react": "18.3.1",
-    "react-dom": "18.3.1",
-    "tailwindcss": "3.4.17",
-    "typescript": "5.7.3"
+    "@astrojs/react": "^4.2.0",
+    "@tailwindcss/vite": "^4.0.6",
+    "@types/react": "^19.0.8",
+    "@types/react-dom": "^19.0.3",
+    "astro": "^5.2.5",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0",
+    "tailwindcss": "^4.0.6"
   },
   "devDependencies": {
-    "eslint-config-prettier": "^10.0.1",
-    "prettier": "^3.4.2",
-    "prettier-plugin-tailwindcss": "^0.6.11",
-    "sharp": "^0.33.5"
+    "@biomejs/biome": "1.9.4",
+    "prettier": "^3.5.0",
+    "prettier-plugin-astro": "^0.14.1"
   }
 }
