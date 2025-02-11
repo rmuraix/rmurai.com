@@ -1,0 +1,9 @@
+---
+import { Image } from "astro:assets";
+import icon from "@/assets/icon.jpg";
+import ReactHeader from "./Header.tsx";
+---
+
+<ReactHeader client:load>
+  <Image src={icon} alt="Icon" class:list={"rounded-full"} />
+</ReactHeader>
