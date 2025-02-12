@@ -5,5 +5,12 @@ import ReactHeader from "./Header.tsx";
 ---
 
 <ReactHeader client:load>
-  <Image src={icon} alt="Icon" class:list={"rounded-full"} />
+  <Image
+    src={icon}
+    alt="Icon"
+    widths={[72]}
+    sizes={"72px"}
+    loading={"eager"}
+    class:list={"rounded-full"}
+  />
 </ReactHeader>
