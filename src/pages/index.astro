@@ -1,4 +1,5 @@
 ---
+import SocialLinksCard from "@/components/Card/SocialCard.tsx";
 import Header from "@/components/Header/Header.astro";
 import LongContent from "@/components/react/Long.tsx";
 import Layout from "@/layouts/Layout.astro";
@@ -9,5 +10,7 @@ import Layout from "@/layouts/Layout.astro";
 
 <Layout>
   <Header />
+  <h2 class="text-2xl p-4 font-bold">Social</h2>
+  <SocialLinksCard />
   <LongContent />
 </Layout>

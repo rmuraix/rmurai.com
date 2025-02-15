@@ -18,7 +18,7 @@ const ReactHeader: React.FC<ReactHeaderProps> = ({ children }) => {
       <div
         className={`
             relative h-20 flex items-center container mx-auto
-            ${isScrolled ? "px-8 lg:px-28" : "px-4"}
+            ${isScrolled ? "sm:w-2/3 lg:w-[38.2vw] px-8" : "px-4"}
             `}
       >
         <a href="/" className="flex items-center">
