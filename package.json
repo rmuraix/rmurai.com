@@ -23,7 +23,7 @@
     "autoprefixer": "10.4.21",
     "cheerio": "^1.0.0",
     "eslint": "8.57.1",
-    "eslint-config-next": "14.2.29",
+    "eslint-config-next": "14.2.30",
     "highlight.js": "^11.11.1",
     "microcms-js-sdk": "^3.1.2",
     "next": "14.2.30",
