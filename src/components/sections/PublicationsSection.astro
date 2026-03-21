@@ -1,0 +1,55 @@
+---
+import type { CollectionEntry } from 'astro:content';
+
+interface Props {
+	publications: CollectionEntry<'publications'>[];
+}
+
+const { publications } = Astro.props;
+---
+
+<section
+	id="publications"
+	data-section
+	class="section-anchor bg-[color-mix(in_srgb,var(--sn-surface-container-low)_84%,var(--sn-surface))] px-6 py-24 sm:px-8 sm:py-28 lg:px-12"
+>
+	<div class="mx-auto max-w-6xl space-y-10">
+		<div class="max-w-3xl space-y-4">
+			<p class="section-kicker">Publications</p>
+			<h2 class="font-heading text-4xl font-semibold tracking-[-0.03em] text-[var(--sn-primary)] sm:text-5xl">
+				Research papers and publications.
+			</h2>
+			<p class="text-base leading-8 text-[var(--sn-on-surface-variant)] sm:text-lg">
+				A selected list of papers, conference publications, and related research outputs.
+			</p>
+		</div>
+
+		<div class="space-y-5">
+			{publications.map((publication) => (
+				<a
+					class="publication-card block rounded-[1.75rem] px-6 py-6 sm:px-8 sm:py-7"
+					href={publication.data.url}
+					target="_blank"
+					rel="noopener noreferrer"
+				>
+					<article class="space-y-3">
+						<h3 class="max-w-4xl font-heading text-2xl font-semibold tracking-[-0.03em] text-[var(--sn-on-surface)] sm:text-[2rem]">
+							{publication.data.title}
+						</h3>
+						<p class="max-w-4xl text-sm leading-7 text-[color-mix(in_srgb,var(--sn-on-surface)_78%,var(--sn-surface))] sm:text-base">
+							{publication.data.authors.join(', ')}
+						</p>
+						<p class="text-sm uppercase tracking-[0.16em] text-[var(--sn-on-surface-variant)]">
+							{publication.data.venue} · {publication.data.year}
+						</p>
+						{publication.data.doi && (
+							<p class="text-xs tracking-[0.08em] text-[color-mix(in_srgb,var(--sn-on-surface-variant)_88%,var(--sn-surface))]">
+								DOI: {publication.data.doi}
+							</p>
+						)}
+					</article>
+				</a>
+			))}
+		</div>
+	</div>
+</section>
