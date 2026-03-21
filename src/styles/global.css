@@ -1,0 +1,81 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+@import "shadcn/tailwind.css";
+
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
+    --font-sans: var(--sn-font-body);
+    --font-heading: var(--sn-font-heading);
+    --color-sidebar-ring: color-mix(in srgb, var(--sn-outline-variant) 20%, transparent);
+    --color-sidebar-border: color-mix(in srgb, var(--sn-outline-variant) 15%, transparent);
+    --color-sidebar-accent-foreground: var(--sn-on-surface);
+    --color-sidebar-accent: var(--sn-surface-variant);
+    --color-sidebar-primary-foreground: var(--sn-surface);
+    --color-sidebar-primary: var(--sn-secondary);
+    --color-sidebar-foreground: var(--sn-on-surface);
+    --color-sidebar: var(--sn-surface-container-low);
+    --color-chart-5: var(--sn-surface-bright);
+    --color-chart-4: var(--sn-primary-container);
+    --color-chart-3: var(--sn-surface-container-highest);
+    --color-chart-2: var(--sn-secondary);
+    --color-chart-1: var(--sn-primary);
+    --color-ring: var(--sn-secondary);
+    --color-input: color-mix(in srgb, var(--sn-outline-variant) 20%, transparent);
+    --color-border: color-mix(in srgb, var(--sn-outline-variant) 15%, transparent);
+    --color-destructive: #b34b5c;
+    --color-accent-foreground: var(--sn-on-surface);
+    --color-accent: var(--sn-surface-container-highest);
+    --color-muted-foreground: var(--sn-on-surface-variant);
+    --color-muted: var(--sn-surface-variant);
+    --color-secondary-foreground: var(--sn-on-surface);
+    --color-secondary: var(--sn-secondary);
+    --color-primary-foreground: var(--sn-surface);
+    --color-primary: var(--sn-primary);
+    --color-popover-foreground: var(--sn-on-surface);
+    --color-popover: var(--sn-surface-container-highest);
+    --color-card-foreground: var(--sn-on-surface);
+    --color-card: var(--sn-surface-container-high);
+    --color-foreground: var(--sn-on-surface);
+    --color-background: var(--sn-surface);
+    --radius-sm: calc(var(--radius) * 0.6);
+    --radius-md: calc(var(--radius) * 0.8);
+    --radius-lg: var(--radius);
+    --radius-xl: calc(var(--radius) * 1.4);
+    --radius-2xl: calc(var(--radius) * 1.8);
+    --radius-3xl: calc(var(--radius) * 2.2);
+    --radius-4xl: calc(var(--radius) * 2.6);
+}
+
+:root {
+    color-scheme: dark;
+    --sn-surface: #0d0e13;
+    --sn-surface-container-lowest: #000000;
+    --sn-surface-container-low: #12131a;
+    --sn-surface-container-high: #1c1f2b;
+    --sn-surface-container-highest: #222533;
+    --sn-surface-bright: #272b3c;
+    --sn-surface-variant: #1a1d27;
+    --sn-on-surface: #e3e4f8;
+    --sn-on-surface-variant: #a8aabc;
+    --sn-primary: #c6c6c6;
+    --sn-secondary: #8596ff;
+    --sn-primary-container: #3a3a3a;
+    --sn-outline-variant: #444757;
+    --radius: 0.625rem;
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+
+  html {
+    @apply bg-background text-foreground font-sans;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+    min-height: 100%;
+  }
+}
