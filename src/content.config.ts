@@ -8,9 +8,9 @@ const publications = defineCollection({
     authors: z.array(z.string()).min(1),
     venue: z.string(),
     year: z.number().int(),
-    doi: z.string(),
+    doi: z.string().optional(),
     abstract: z.string().optional(),
-    url: z.string().url().optional(),
+    url: z.string().url(),
     pdfUrl: z.string().url().optional(),
   }),
 });

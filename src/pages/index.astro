@@ -1,10 +1,26 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import { getCollection } from 'astro:content';
 import { SiteHeader } from '@/components/SiteHeader';
 import { buttonVariants } from '@/components/ui/button';
 import { fetchZennArticles } from '@/lib/zenn';
 
+const publications = (await getCollection('publications')).sort((left, right) => {
+	return right.data.year - left.data.year || left.data.title.localeCompare(right.data.title);
+});
 const latestZennArticles = await fetchZennArticles("rmuraix");
+const featuredZennArticles = latestZennArticles.slice(0, 3);
+const currentYear = new Date().getFullYear();
+
+function formatCompactDate(value: string) {
+	const parsed = new Date(value);
+
+	if (Number.isNaN(parsed.getTime())) {
+		return value;
+	}
+
+	return `${parsed.getUTCFullYear()}.${String(parsed.getUTCMonth() + 1).padStart(2, '0')}.${String(parsed.getUTCDate()).padStart(2, '0')}`;
+}
 ---
 
 <Layout>
@@ -96,17 +112,49 @@ const latestZennArticles = await fetchZennArticles("rmuraix");
 			data-section
 			class="section-anchor bg-[color-mix(in_srgb,var(--sn-surface-container-low)_84%,var(--sn-surface))] px-6 py-24 sm:px-8 sm:py-28 lg:px-12"
 		>
-			<div class="mx-auto max-w-6xl space-y-6">
-				<p class="section-kicker">Publications</p>
+			<div class="mx-auto max-w-6xl space-y-10">
 				<div class="max-w-3xl space-y-4">
+					<p class="section-kicker">Publications</p>
 					<h2 class="font-heading text-4xl font-semibold tracking-[-0.03em] text-[var(--sn-primary)] sm:text-5xl">
-						A tonal holding space for papers, metadata, and future collection views.
+						Research papers and publications.
 					</h2>
 					<p class="text-base leading-8 text-[var(--sn-on-surface-variant)] sm:text-lg">
-						Phase 2 stops at structure. This section provides the anchored destination, background shift,
-						and generous spacing needed for the later publication data work without leaking into rendering
-						scope too early.
+						A selected list of papers, conference publications, and related research outputs.
 					</p>
+				</div>
+
+				<div class="space-y-5">
+					{publications.map((publication) => (
+						<article class="publication-card flex flex-col gap-5 rounded-[1.75rem] px-6 py-6 sm:px-8 sm:py-7">
+							<div class="space-y-3">
+								<h3 class="max-w-4xl font-heading text-2xl font-semibold tracking-[-0.03em] text-[var(--sn-on-surface)] sm:text-[2rem]">
+									{publication.data.title}
+								</h3>
+								<p class="max-w-4xl text-sm leading-7 text-[color-mix(in_srgb,var(--sn-on-surface)_78%,var(--sn-surface))] sm:text-base">
+									{publication.data.authors.join(', ')}
+								</p>
+								<p class="text-sm uppercase tracking-[0.16em] text-[var(--sn-on-surface-variant)]">
+									{publication.data.venue} · {publication.data.year}
+								</p>
+								{publication.data.doi && (
+									<p class="text-xs tracking-[0.08em] text-[color-mix(in_srgb,var(--sn-on-surface-variant)_88%,var(--sn-surface))]">
+										DOI: {publication.data.doi}
+									</p>
+								)}
+							</div>
+
+							<div class="flex justify-end">
+								<a
+									class="publication-doi"
+									href={publication.data.url}
+									target="_blank"
+									rel="noopener noreferrer"
+								>
+									{publication.data.doi ? 'Open DOI' : 'Open Link'}
+								</a>
+							</div>
+						</article>
+					))}
 				</div>
 			</div>
 		</section>
@@ -117,19 +165,113 @@ const latestZennArticles = await fetchZennArticles("rmuraix");
 			data-zenn-count={latestZennArticles.length}
 			class="section-anchor bg-[color-mix(in_srgb,var(--sn-surface-container-high)_58%,var(--sn-surface))] px-6 py-24 sm:px-8 sm:py-28 lg:px-12"
 		>
-			<div class="mx-auto max-w-6xl space-y-6">
-				<p class="section-kicker">Blog</p>
+			<div class="mx-auto max-w-6xl space-y-10">
 				<div class="max-w-3xl space-y-4">
+					<p class="section-kicker">Blog</p>
 					<h2 class="font-heading text-4xl font-semibold tracking-[-0.03em] text-[var(--sn-primary)] sm:text-5xl">
-						A third destination with its own surface tone, ready for technical writing.
+						Technical notes and blog posts.
 					</h2>
 					<p class="text-base leading-8 text-[var(--sn-on-surface-variant)] sm:text-lg">
-						The section is intentionally spare. Its job in this phase is to prove the page shell, anchor
-						offset, and active navigation behavior across all three required destinations, including
-						compact mobile layouts.
+						A selection of recent writing on research, implementation, and experimentation.
 					</p>
+					<div>
+						<a
+							class="publication-doi"
+							href="https://zenn.dev/rmuraix"
+							target="_blank"
+							rel="noopener noreferrer"
+						>
+							View Zenn Profile
+						</a>
+					</div>
 				</div>
+
+				{featuredZennArticles.length > 0 ? (
+					<div class="grid gap-4 md:grid-cols-2 xl:grid-cols-3">
+						{featuredZennArticles.map((article) => (
+							<a
+								class="blog-card flex min-h-52 flex-col justify-between gap-8 rounded-[1.75rem] px-6 py-6 sm:px-7"
+								href={article.url}
+								target="_blank"
+								rel="noopener noreferrer"
+							>
+								<div class="space-y-4">
+									<p class="text-3xl leading-none">{article.emoji}</p>
+									<h3 class="font-heading text-2xl font-semibold tracking-[-0.03em] text-[var(--sn-on-surface)]">
+										{article.title}
+									</h3>
+								</div>
+								<p class="text-sm uppercase tracking-[0.16em] text-[var(--sn-on-surface-variant)]">
+									{formatCompactDate(article.publishedAt)}
+								</p>
+							</a>
+						))}
+					</div>
+				) : (
+					<div class="blog-fallback max-w-3xl rounded-[1.75rem] px-6 py-6 sm:px-8 sm:py-7">
+						<p class="text-base leading-8 text-[var(--sn-on-surface-variant)] sm:text-lg">
+							Recent posts are temporarily unavailable. The full archive is still available on Zenn.
+						</p>
+						<div class="pt-5">
+							<a
+								class="publication-doi"
+								href="https://zenn.dev/rmuraix"
+								target="_blank"
+								rel="noopener noreferrer"
+							>
+								Visit Zenn
+							</a>
+						</div>
+					</div>
+				)}
 			</div>
 		</section>
 	</main>
+
+	<footer class="bg-[color-mix(in_srgb,var(--sn-surface-container-low)_72%,var(--sn-surface))] px-6 pb-10 pt-12 sm:px-8 lg:px-12">
+		<div class="mx-auto flex max-w-6xl flex-col gap-6 sm:flex-row sm:items-center sm:justify-between">
+			<p class="text-sm tracking-[0.08em] text-[var(--sn-on-surface-variant)]">
+				&copy; {currentYear} Ryota Murai
+			</p>
+
+			<div class="flex items-center gap-3">
+				<a
+					class="footer-icon-link"
+					href="https://github.com/rmuraix"
+					target="_blank"
+					rel="noopener noreferrer"
+					aria-label="GitHub"
+				>
+					<span class="sr-only">GitHub</span>
+					<svg viewBox="0 0 16 16" fill="none" aria-hidden="true">
+						<path fill="currentColor" d="M8 .9a7.1 7.1 0 0 0-2.25 13.84c.36.07.49-.15.49-.35v-1.2c-2.01.44-2.43-.85-2.43-.85-.32-.82-.79-1.04-.79-1.04-.65-.44.05-.43.05-.43.71.05 1.09.74 1.09.74.64 1.08 1.67.77 2.08.59.06-.46.25-.78.45-.96-1.6-.18-3.29-.79-3.29-3.55 0-.79.28-1.43.74-1.94-.07-.18-.32-.92.07-1.91 0 0 .6-.19 1.97.74A6.8 6.8 0 0 1 8 4.59c.61 0 1.23.08 1.81.23 1.37-.93 1.97-.74 1.97-.74.39.99.14 1.73.07 1.91.46.51.74 1.15.74 1.94 0 2.77-1.69 3.37-3.31 3.55.26.22.49.66.49 1.33v1.58c0 .2.13.42.5.35A7.1 7.1 0 0 0 8 .9Z"></path>
+					</svg>
+				</a>
+				<a
+					class="footer-icon-link"
+					href="https://www.linkedin.com/in/rmurai/"
+					target="_blank"
+					rel="noopener noreferrer"
+					aria-label="LinkedIn"
+				>
+					<span class="sr-only">LinkedIn</span>
+					<svg viewBox="0 0 16 16" fill="none" aria-hidden="true">
+						<path fill="currentColor" d="M3.57 5.12a1.03 1.03 0 1 1 0-2.06 1.03 1.03 0 0 1 0 2.06Zm.9 1.23H2.66v6.13h1.81V6.35Zm2.84 0H5.53v6.13h1.78V9.26c0-1.7 2.2-1.84 2.2 0v3.22h1.79V8.64c0-2.98-3.38-2.87-3.99-1.4V6.35Z"></path>
+					</svg>
+				</a>
+				<a
+					class="footer-icon-link"
+					href="https://orcid.org/0009-0007-0248-9267"
+					target="_blank"
+					rel="noopener noreferrer"
+					aria-label="ORCID"
+				>
+					<span class="sr-only">ORCID</span>
+					<svg viewBox="0 0 16 16" fill="none" aria-hidden="true">
+						<path fill="currentColor" d="M8 1.3a6.7 6.7 0 1 0 0 13.4 6.7 6.7 0 0 0 0-13.4Zm-1.9 2.54a.72.72 0 1 1 0 1.44.72.72 0 0 1 0-1.44Zm.58 7.9H5.5V6.2h1.18v5.54Zm3.07-.01H7.68V6.2h2.07a1.78 1.78 0 1 1 0 3.55H8.86v1.98h.89Z"></path>
+					</svg>
+				</a>
+			</div>
+		</div>
+	</footer>
 </Layout>

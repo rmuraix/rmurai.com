@@ -108,4 +108,83 @@
     color: var(--sn-secondary);
   }
 
+  .publication-card {
+    background: color-mix(in srgb, var(--sn-surface-container-low) 88%, var(--sn-surface));
+    transition: background-color 180ms ease, transform 180ms ease;
+  }
+
+  .publication-card:hover {
+    background: color-mix(in srgb, var(--sn-surface-container-high) 82%, var(--sn-surface));
+    transform: translateY(-4px);
+  }
+
+  .publication-doi {
+    align-items: center;
+    background: color-mix(in srgb, var(--sn-surface-variant) 78%, transparent);
+    border-radius: 9999px;
+    color: var(--sn-on-surface-variant);
+    display: inline-flex;
+    font-family: var(--sn-font-heading);
+    font-size: 0.8rem;
+    font-weight: 600;
+    letter-spacing: 0.16em;
+    padding: 0.7rem 1rem;
+    text-transform: uppercase;
+    transition: color 180ms ease, background-color 180ms ease, transform 180ms ease;
+  }
+
+  .publication-doi:hover,
+  .publication-doi:focus-visible {
+    background: color-mix(in srgb, var(--sn-surface-container-highest) 88%, transparent);
+    color: var(--sn-secondary);
+    transform: translateY(-1px);
+  }
+
+  .blog-card,
+  .blog-fallback {
+    background: color-mix(in srgb, var(--sn-surface-container-highest) 74%, var(--sn-surface));
+    transition: background-color 180ms ease, transform 180ms ease;
+  }
+
+  .blog-card:hover,
+  .blog-card:focus-visible {
+    background: color-mix(in srgb, var(--sn-surface-container-highest) 92%, var(--sn-surface));
+    transform: translateY(-4px);
+  }
+
+  .footer-icon-link {
+    align-items: center;
+    background: color-mix(in srgb, var(--sn-surface-container-highest) 72%, transparent);
+    border-radius: 9999px;
+    color: var(--sn-on-surface-variant);
+    display: inline-flex;
+    height: 2.75rem;
+    justify-content: center;
+    transition: color 180ms ease, background-color 180ms ease, transform 180ms ease;
+    width: 2.75rem;
+  }
+
+  .footer-icon-link:hover,
+  .footer-icon-link:focus-visible {
+    background: color-mix(in srgb, var(--sn-surface-container-highest) 100%, transparent);
+    color: var(--sn-secondary);
+    transform: translateY(-1px);
+  }
+
+  .footer-icon-link svg {
+    height: 1.15rem;
+    width: 1.15rem;
+  }
+
+  .sr-only {
+    border: 0;
+    clip: rect(0, 0, 0, 0);
+    height: 1px;
+    margin: -1px;
+    overflow: hidden;
+    padding: 0;
+    position: absolute;
+    white-space: nowrap;
+    width: 1px;
+  }
 }
