@@ -79,3 +79,32 @@
     min-height: 100%;
   }
 }
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+}
+
+@layer components {
+  .section-anchor {
+    scroll-margin-top: 7rem;
+  }
+
+  .section-kicker {
+    color: var(--sn-secondary);
+    font-family: var(--sn-font-heading);
+    font-size: 0.8rem;
+    font-weight: 600;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+  }
+
+  .section-link {
+    position: relative;
+  }
+
+  .section-link[data-active="true"] {
+    color: var(--sn-secondary);
+  }
+}

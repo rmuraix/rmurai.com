@@ -7,15 +7,17 @@
   ],
   "exclude": [
     "dist"
-],
-"compilerOptions": {
+  ],
+  "compilerOptions": {
     "types": [
-        "./worker-configuration.d.ts"
+      "./worker-configuration.d.ts"
     ],
     "paths": {
       "@/*": [
         "./src/*"
       ]
-    }
-}
+    },
+    "jsx": "react-jsx",
+    "jsxImportSource": "react"
+  }
 }

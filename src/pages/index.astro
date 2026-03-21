@@ -1,11 +1,94 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import { SiteHeader } from '@/components/SiteHeader';
 ---
 
 <Layout>
-	<main>
-		<section>
-			<p>rmurai.com foundation is in progress.</p>
+	<SiteHeader client:load />
+
+	<main class="relative overflow-x-clip">
+		<div class="pointer-events-none absolute inset-x-0 top-0 h-[32rem] bg-[radial-gradient(circle_at_top_right,color-mix(in_srgb,var(--sn-secondary)_18%,transparent),transparent_58%)]" />
+
+		<section
+			id="profile"
+			data-section
+			class="section-anchor relative flex min-h-[calc(100svh-5rem)] items-center px-6 pb-16 pt-32 sm:px-8 lg:px-12"
+		>
+			<div class="mx-auto grid w-full max-w-6xl gap-12 lg:grid-cols-[minmax(0,1.25fr)_minmax(18rem,0.75fr)] lg:items-end">
+				<div class="space-y-8">
+					<div class="space-y-4">
+						<p class="section-kicker">Phase 02 Shell</p>
+						<h1 class="max-w-4xl font-heading text-5xl font-semibold tracking-[-0.04em] text-[var(--sn-primary)] sm:text-6xl lg:text-7xl">
+							A quiet one-page frame for research notes, publications, and essays.
+						</h1>
+						<p class="max-w-2xl text-base leading-8 text-[var(--sn-on-surface-variant)] sm:text-lg">
+							This opening section is intentionally structural. It establishes the landing rhythm,
+							editorial spacing, and anchor behavior that later phases will populate with real profile
+							content.
+						</p>
+					</div>
+
+					<div class="flex flex-wrap gap-3 text-sm text-[var(--sn-on-surface-variant)]">
+						<span class="rounded-full bg-[color-mix(in_srgb,var(--sn-surface-container-highest)_78%,transparent)] px-4 py-2">
+							Profile shell
+						</span>
+						<span class="rounded-full bg-[color-mix(in_srgb,var(--sn-surface-container-highest)_78%,transparent)] px-4 py-2">
+							Anchored navigation
+						</span>
+						<span class="rounded-full bg-[color-mix(in_srgb,var(--sn-surface-container-highest)_78%,transparent)] px-4 py-2">
+							Scroll-spy state
+						</span>
+					</div>
+				</div>
+
+				<div class="rounded-[2rem] bg-[color-mix(in_srgb,var(--sn-surface-container-high)_86%,transparent)] p-6 shadow-[0px_20px_40px_rgba(0,0,0,0.18)]">
+					<p class="section-kicker">Why This Phase Exists</p>
+					<p class="mt-4 text-sm leading-7 text-[var(--sn-on-surface-variant)] sm:text-base">
+						The page now behaves like a composed single-page archive instead of a placeholder. Each
+						target section lands below the floating header and can advertise its state in the island nav.
+					</p>
+				</div>
+			</div>
+		</section>
+
+		<section
+			id="publications"
+			data-section
+			class="section-anchor bg-[color-mix(in_srgb,var(--sn-surface-container-low)_84%,var(--sn-surface))] px-6 py-24 sm:px-8 sm:py-28 lg:px-12"
+		>
+			<div class="mx-auto max-w-6xl space-y-6">
+				<p class="section-kicker">Publications</p>
+				<div class="max-w-3xl space-y-4">
+					<h2 class="font-heading text-4xl font-semibold tracking-[-0.03em] text-[var(--sn-primary)] sm:text-5xl">
+						A tonal holding space for papers, metadata, and future collection views.
+					</h2>
+					<p class="text-base leading-8 text-[var(--sn-on-surface-variant)] sm:text-lg">
+						Phase 2 stops at structure. This section provides the anchored destination, background shift,
+						and generous spacing needed for the later publication data work without leaking into rendering
+						scope too early.
+					</p>
+				</div>
+			</div>
+		</section>
+
+		<section
+			id="blog"
+			data-section
+			class="section-anchor bg-[color-mix(in_srgb,var(--sn-surface-container-high)_58%,var(--sn-surface))] px-6 py-24 sm:px-8 sm:py-28 lg:px-12"
+		>
+			<div class="mx-auto max-w-6xl space-y-6">
+				<p class="section-kicker">Blog</p>
+				<div class="max-w-3xl space-y-4">
+					<h2 class="font-heading text-4xl font-semibold tracking-[-0.03em] text-[var(--sn-primary)] sm:text-5xl">
+						A third destination with its own surface tone, ready for technical writing.
+					</h2>
+					<p class="text-base leading-8 text-[var(--sn-on-surface-variant)] sm:text-lg">
+						The section is intentionally spare. Its job in this phase is to prove the page shell, anchor
+						offset, and active navigation behavior across all three required destinations, including
+						compact mobile layouts.
+					</p>
+				</div>
+			</div>
 		</section>
 	</main>
 </Layout>
