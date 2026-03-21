@@ -1,0 +1,88 @@
+---
+import type { ZennArticle } from '@/lib/zenn';
+
+interface Props {
+	featuredZennArticles: ZennArticle[];
+	latestZennArticlesCount: number;
+}
+
+const { featuredZennArticles, latestZennArticlesCount } = Astro.props;
+
+function formatCompactDate(value: string) {
+	const parsed = new Date(value);
+
+	if (Number.isNaN(parsed.getTime())) {
+		return value;
+	}
+
+	return `${parsed.getUTCFullYear()}.${String(parsed.getUTCMonth() + 1).padStart(2, '0')}.${String(parsed.getUTCDate()).padStart(2, '0')}`;
+}
+---
+
+<section
+	id="blog"
+	data-section
+	data-zenn-count={latestZennArticlesCount}
+	class="section-anchor bg-[color-mix(in_srgb,var(--sn-surface-container-high)_58%,var(--sn-surface))] px-6 py-24 sm:px-8 sm:py-28 lg:px-12"
+>
+	<div class="mx-auto max-w-6xl space-y-10">
+		<div class="max-w-3xl space-y-4">
+			<p class="section-kicker">Blog</p>
+			<h2 class="font-heading text-4xl font-semibold tracking-[-0.03em] text-[var(--sn-primary)] sm:text-5xl">
+				Technical notes and blog posts.
+			</h2>
+			<p class="text-base leading-8 text-[var(--sn-on-surface-variant)] sm:text-lg">
+				A selection of recent writing on research, implementation, and experimentation.
+			</p>
+			<div>
+				<a
+					class="publication-doi"
+					href="https://zenn.dev/rmuraix"
+					target="_blank"
+					rel="noopener noreferrer"
+				>
+					View Zenn Profile
+				</a>
+			</div>
+		</div>
+
+		{featuredZennArticles.length > 0 ? (
+			<div class="grid gap-4 md:grid-cols-2 xl:grid-cols-3">
+				{featuredZennArticles.map((article) => (
+					<a
+						class="blog-card flex min-h-52 flex-col justify-between gap-8 rounded-[1.75rem] px-6 py-6 sm:px-7"
+						href={article.url}
+						target="_blank"
+						rel="noopener noreferrer"
+					>
+						<div class="space-y-4">
+							<p class="text-3xl leading-none">{article.emoji}</p>
+							<h3 class="font-heading text-2xl font-semibold tracking-[-0.03em] text-[var(--sn-on-surface)]">
+								{article.title}
+							</h3>
+						</div>
+						<p class="text-sm uppercase tracking-[0.16em] text-[var(--sn-on-surface-variant)]">
+							{formatCompactDate(article.publishedAt)}
+						</p>
+					</a>
+				))}
+			</div>
+		) : (
+			<div class="blog-fallback max-w-3xl rounded-[1.75rem] px-6 py-6 sm:px-8 sm:py-7">
+				<p class="text-base leading-8 text-[var(--sn-on-surface-variant)] sm:text-lg">
+					Recent posts are temporarily unavailable. The full archive is still available on Zenn.
+				</p>
+				<div class="pt-5">
+					<a
+						class="publication-doi"
+						href="https://zenn.dev/rmuraix"
+						target="_blank"
+						rel="noopener noreferrer"
+					>
+						Visit Zenn
+					</a>
+				</div>
+			</div>
+		)}
+	</div>
+</section>
