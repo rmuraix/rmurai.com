@@ -1,42 +1,24 @@
 {
-  "name": "rmurai.com",
-  "version": "0.1.0",
-  "private": true,
-  "scripts": {
-    "dev": "next dev",
-    "build": "next build",
-    "start": "next start",
-    "lint": "next lint",
-    "lint:fix": "next lint --fix",
-    "format:check": "npx prettier . --check",
-    "format:fix": "npx prettier . --write"
-  },
-  "dependencies": {
-    "@fortawesome/fontawesome-svg-core": "^6.7.2",
-    "@fortawesome/free-brands-svg-icons": "^6.7.2",
-    "@fortawesome/free-solid-svg-icons": "^6.7.2",
-    "@fortawesome/react-fontawesome": "^0.2.3",
-    "@types/node": "20.19.10",
-    "@types/react": "18.3.23",
-    "@types/react-dom": "18.3.7",
-    "@vercel/analytics": "^1.4.1",
-    "autoprefixer": "10.4.21",
-    "cheerio": "^1.0.0",
-    "eslint": "8.57.1",
-    "eslint-config-next": "14.2.31",
-    "highlight.js": "^11.11.1",
-    "microcms-js-sdk": "^3.1.2",
-    "next": "14.2.35",
-    "postcss": "8.5.6",
-    "react": "18.3.1",
-    "react-dom": "18.3.1",
-    "tailwindcss": "3.4.17",
-    "typescript": "5.7.3"
-  },
-  "devDependencies": {
-    "eslint-config-prettier": "^10.1.8",
-    "prettier": "^3.4.2",
-    "prettier-plugin-tailwindcss": "^0.6.14",
-    "sharp": "^0.33.5"
-  }
+	"name": "rmurai-com",
+	"type": "module",
+	"version": "0.0.1",
+	"engines": {
+		"node": ">=22.12.0"
+	},
+	"scripts": {
+		"dev": "astro dev",
+		"build": "astro build",
+		"preview": "astro build && astro preview",
+		"astro": "astro",
+		"generate-types": "wrangler types",
+		"deploy": "astro build && wrangler deploy",
+		"cf-typegen": "wrangler types"
+	},
+	"dependencies": {
+		"@astrojs/cloudflare": "^13.1.2",
+		"astro": "^6.0.7"
+	},
+	"devDependencies": {
+		"wrangler": "^4.76.0"
+	}
 }
