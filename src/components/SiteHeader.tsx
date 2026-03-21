@@ -126,7 +126,7 @@ export function SiteHeader() {
     <header className="fixed inset-x-0 top-4 z-50 flex justify-center px-4 sm:top-5">
       <nav
         aria-label="Section navigation"
-        className="flex items-center gap-2 rounded-full bg-[color-mix(in_srgb,var(--sn-surface-bright)_72%,transparent)] px-3 py-2.5 shadow-[0px_20px_40px_rgba(0,0,0,0.4)] backdrop-blur-xl sm:gap-4 sm:px-5 sm:py-3"
+        className="flex items-center gap-2 rounded-2xl bg-[color-mix(in_srgb,var(--sn-surface-bright)_72%,transparent)] px-3 py-2.5 shadow-[0px_20px_40px_rgba(0,0,0,0.4)] backdrop-blur-xl sm:gap-4 sm:px-5 sm:py-3"
       >
         <span className="hidden whitespace-nowrap pr-2 font-heading text-sm font-semibold tracking-[0.28em] text-[var(--sn-primary)] sm:inline">
           RYOTA MURAI
