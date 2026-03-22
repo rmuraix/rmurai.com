@@ -15,7 +15,10 @@ const latestZennArticles = await fetchZennArticles("rmuraix");
 const featuredZennArticles = latestZennArticles.slice(0, 3);
 ---
 
-<Layout>
+<Layout
+	title="Ryota Murai"
+	description="Ryota Murai is a master's student specializing in Computer Vision. His work focuses on understanding visual information and building practical systems that connect research insight with real-world applications."
+>
 	<SiteHeader client:load />
 
 	<main class="relative overflow-x-clip">
