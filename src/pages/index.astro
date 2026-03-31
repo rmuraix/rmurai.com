@@ -4,7 +4,6 @@ import { getCollection } from 'astro:content';
 import ProfileSection from '@/components/sections/ProfileSection.astro';
 import PublicationsSection from '@/components/sections/PublicationsSection.astro';
 import BlogSection from '@/components/sections/BlogSection.astro';
-import { SiteHeader } from '@/components/SiteHeader';
 import SiteFooter from '@/components/SiteFooter.astro';
 import { fetchZennArticles } from '@/lib/zenn';
 
@@ -16,8 +15,6 @@ const featuredZennArticles = latestZennArticles.slice(0, 3);
 ---
 
 <Layout>
-	<SiteHeader client:load />
-
 	<main class="relative overflow-x-clip">
 		<ProfileSection />
 		<PublicationsSection publications={publications} />
