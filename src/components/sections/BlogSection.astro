@@ -1,88 +1,84 @@
 ---
+import Icon from '@/components/Icon.astro';
+import SectionHeading from '@/components/SectionHeading.astro';
+import { site } from '@/lib/site';
 import type { ZennArticle } from '@/lib/zenn';
 
 interface Props {
-	featuredZennArticles: ZennArticle[];
-	latestZennArticlesCount: number;
+	articles: ZennArticle[];
+	totalCount: number;
 }
 
-const { featuredZennArticles, latestZennArticlesCount } = Astro.props;
+const { articles, totalCount } = Astro.props;
 
-function formatCompactDate(value: string) {
+function toIsoDate(value: string) {
 	const parsed = new Date(value);
+	return Number.isNaN(parsed.getTime()) ? undefined : parsed.toISOString().slice(0, 10);
+}
 
-	if (Number.isNaN(parsed.getTime())) {
-		return value;
-	}
-
-	return `${parsed.getUTCFullYear()}.${String(parsed.getUTCMonth() + 1).padStart(2, '0')}.${String(parsed.getUTCDate()).padStart(2, '0')}`;
+function formatDate(value: string) {
+	const iso = toIsoDate(value);
+	return iso ? iso.replaceAll('-', '.') : value;
 }
 ---
 
-<section
-	id="blog"
-	data-section
-	data-zenn-count={latestZennArticlesCount}
-	class="section-anchor bg-[color-mix(in_srgb,var(--sn-surface-container-high)_58%,var(--sn-surface))] px-6 py-24 sm:px-8 sm:py-28 lg:px-12"
->
-	<div class="mx-auto max-w-6xl space-y-10">
-		<div class="max-w-3xl space-y-4">
-			<p class="section-kicker">Blog</p>
-			<h2 class="font-heading text-4xl font-semibold tracking-[-0.03em] text-[var(--sn-primary)] sm:text-5xl">
-				Technical notes and blog posts.
-			</h2>
-			<p class="text-base leading-8 text-[var(--sn-on-surface-variant)] sm:text-lg">
-				A selection of recent writing on research, implementation, and experimentation.
-			</p>
-			<div>
-				<a
-					class="publication-doi"
-					href="https://zenn.dev/rmuraix"
-					target="_blank"
-					rel="noopener noreferrer"
-				>
-					View Zenn Profile
-				</a>
-			</div>
-		</div>
+<section id="blog" data-section class="section bg-[var(--sn-bg-elevated)]">
+	<div class="shell">
+		<SectionHeading
+			command="blog"
+			title="Notes from the workbench."
+			count={totalCount > 0 ? `${totalCount} posts` : undefined}
+		>
+			Japanese-language write-ups on research tooling, implementation details, and things
+			worth remembering. Published on Zenn.
+		</SectionHeading>
 
-		{featuredZennArticles.length > 0 ? (
-			<div class="grid gap-4 md:grid-cols-2 xl:grid-cols-3">
-				{featuredZennArticles.map((article) => (
-					<a
-						class="blog-card flex min-h-52 flex-col justify-between gap-8 rounded-[1.75rem] px-6 py-6 sm:px-7"
-						href={article.url}
-						target="_blank"
-						rel="noopener noreferrer"
-					>
-						<div class="space-y-4">
-							<p class="text-3xl leading-none">{article.emoji}</p>
-							<h3 class="font-heading text-2xl font-semibold tracking-[-0.03em] text-[var(--sn-on-surface)]">
-								{article.title}
-							</h3>
-						</div>
-						<p class="text-sm uppercase tracking-[0.16em] text-[var(--sn-on-surface-variant)]">
-							{formatCompactDate(article.publishedAt)}
-						</p>
-					</a>
-				))}
-			</div>
-		) : (
-			<div class="blog-fallback max-w-3xl rounded-[1.75rem] px-6 py-6 sm:px-8 sm:py-7">
-				<p class="text-base leading-8 text-[var(--sn-on-surface-variant)] sm:text-lg">
-					Recent posts are temporarily unavailable. The full archive is still available on Zenn.
+		{
+			articles.length > 0 ? (
+				<ol class="list-none p-0">
+					{articles.map((article) => (
+						<li class="entry" data-reveal>
+							<span class="entry-rule" aria-hidden="true" />
+
+							<div class="grid gap-x-[clamp(1.5rem,4vw,3.5rem)] gap-y-4 md:grid-cols-[6rem_1fr]">
+								<p class="mono pt-[0.4em] text-[var(--sn-accent)] md:text-right">
+									<time datetime={toIsoDate(article.publishedAt)}>
+										{formatDate(article.publishedAt)}
+									</time>
+								</p>
+
+								<div class="min-w-0">
+									<h3 class="entry-title font-normal tracking-[-0.015em]">
+										<span class="mr-2 select-none" aria-hidden="true">
+											{article.emoji}
+										</span>
+										<a
+											class="stretched-link"
+											href={article.url}
+											target="_blank"
+											rel="noopener noreferrer"
+										>
+											{article.title}
+										</a>
+										<Icon name="arrow" class="entry-arrow ml-2 inline-block size-4 align-baseline" />
+									</h3>
+								</div>
+							</div>
+						</li>
+					))}
+				</ol>
+			) : (
+				<p class="max-w-[60ch] text-[length:var(--sn-text-body)] leading-[1.7] text-[var(--sn-fg-muted)]" data-reveal>
+					The feed could not be reached at build time. The full archive is still on Zenn.
 				</p>
-				<div class="pt-5">
-					<a
-						class="publication-doi"
-						href="https://zenn.dev/rmuraix"
-						target="_blank"
-						rel="noopener noreferrer"
-					>
-						Visit Zenn
-					</a>
-				</div>
-			</div>
-		)}
+			)
+		}
+
+		<div class="mt-[clamp(2.5rem,2rem+2vw,3.5rem)]" data-reveal>
+			<a class="chip mono" href={site.zenn} target="_blank" rel="noopener noreferrer">
+				zenn.dev/rmuraix
+				<Icon name="arrow" class="size-4" />
+			</a>
+		</div>
 	</div>
 </section>

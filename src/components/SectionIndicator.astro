@@ -1,0 +1,25 @@
+---
+import { sections } from '@/lib/site';
+---
+
+<nav
+	class="pointer-events-none fixed right-[clamp(1.5rem,3vw,3rem)] top-1/2 z-40 hidden -translate-y-1/2 lg:block"
+	aria-label="Sections"
+>
+	<ul class="pointer-events-auto m-0 flex list-none flex-col items-end gap-1 p-0">
+		{
+			sections.map((section) => (
+				<li>
+					<a
+						class="indicator-link mono"
+						href={`#${section.id}`}
+						data-indicator-for={section.id}
+						aria-current="false"
+					>
+						{section.label}
+					</a>
+				</li>
+			))
+		}
+	</ul>
+</nav>

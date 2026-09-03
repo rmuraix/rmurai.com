@@ -4,11 +4,73 @@
 
 @custom-variant dark (&:is(.dark *));
 
+/* ---------------------------------------------------------------------------
+   Design tokens — "quiet intelligence x terminal precision"
+   --------------------------------------------------------------------------- */
+
+:root {
+    color-scheme: dark;
+
+    /* Palette */
+    --sn-bg: #0a0a0a;
+    --sn-bg-elevated: #111113;
+    --sn-fg: #ededed;
+    --sn-fg-muted: #8a8a8e;
+    --sn-line: #232326;
+    --sn-accent: #2f6fff;
+    --sn-accent-bright: #5c8cff;
+
+    /* Motion */
+    --sn-ease: cubic-bezier(0.16, 1, 0.3, 1);
+    --sn-duration-fast: 200ms;
+    --sn-duration: 240ms;
+
+    /* Type scale */
+    --sn-text-hero: clamp(2.5rem, 8vw, 5.5rem);
+    --sn-text-section: clamp(1.5rem, 4vw, 2.5rem);
+    --sn-text-lead: clamp(1.0625rem, 0.98rem + 0.4vw, 1.375rem);
+    --sn-text-body: clamp(1rem, 0.96rem + 0.2vw, 1.125rem);
+    --sn-text-meta: 0.8125rem;
+
+    /* Rhythm — section gaps scale from 120px (mobile) to 200px (desktop) */
+    --sn-section-gap: clamp(7.5rem, 4rem + 12vw, 12.5rem);
+    --sn-gutter: clamp(1.5rem, 1rem + 3vw, 4.5rem);
+    --sn-measure: 76rem;
+
+    /* shadcn/ui bridge — keeps generated UI primitives on the same palette */
+    --sn-surface: var(--sn-bg);
+    --sn-surface-container-lowest: #000000;
+    --sn-surface-container-low: var(--sn-bg-elevated);
+    --sn-surface-container-high: #141417;
+    --sn-surface-container-highest: #17171b;
+    --sn-surface-bright: #1d1d22;
+    --sn-surface-variant: #131316;
+    --sn-on-surface: var(--sn-fg);
+    --sn-on-surface-variant: var(--sn-fg-muted);
+    --sn-primary: var(--sn-fg);
+    --sn-secondary: var(--sn-accent);
+    --sn-primary-container: #17171b;
+    --sn-outline-variant: var(--sn-line);
+    --radius: 0.25rem;
+}
+
 @theme inline {
     --font-sans: var(--sn-font-body);
     --font-heading: var(--sn-font-heading);
-    --color-sidebar-ring: color-mix(in srgb, var(--sn-outline-variant) 20%, transparent);
-    --color-sidebar-border: color-mix(in srgb, var(--sn-outline-variant) 15%, transparent);
+    --font-mono: var(--sn-font-mono);
+
+    /* Namespaced aliases so they cannot collide with shadcn's token names. */
+    --color-ink: var(--sn-fg);
+    --color-ink-muted: var(--sn-fg-muted);
+    --color-hair: var(--sn-line);
+    --color-brand: var(--sn-accent);
+    --color-brand-bright: var(--sn-accent-bright);
+    --color-elevated: var(--sn-bg-elevated);
+
+    --ease-out-expo: var(--sn-ease);
+
+    --color-sidebar-ring: var(--sn-accent);
+    --color-sidebar-border: var(--sn-line);
     --color-sidebar-accent-foreground: var(--sn-on-surface);
     --color-sidebar-accent: var(--sn-surface-variant);
     --color-sidebar-primary-foreground: var(--sn-surface);
@@ -20,9 +82,9 @@
     --color-chart-3: var(--sn-surface-container-highest);
     --color-chart-2: var(--sn-secondary);
     --color-chart-1: var(--sn-primary);
-    --color-ring: var(--sn-secondary);
-    --color-input: color-mix(in srgb, var(--sn-outline-variant) 20%, transparent);
-    --color-border: color-mix(in srgb, var(--sn-outline-variant) 15%, transparent);
+    --color-ring: var(--sn-accent-bright);
+    --color-input: var(--sn-line);
+    --color-border: var(--sn-line);
     --color-destructive: #b34b5c;
     --color-accent-foreground: var(--sn-on-surface);
     --color-accent: var(--sn-surface-container-highest);
@@ -47,138 +109,106 @@
     --radius-4xl: calc(var(--radius) * 2.6);
 }
 
-:root {
-    color-scheme: dark;
-    --sn-surface: #0d0e13;
-    --sn-surface-container-lowest: #000000;
-    --sn-surface-container-low: #12131a;
-    --sn-surface-container-high: #1c1f2b;
-    --sn-surface-container-highest: #222533;
-    --sn-surface-bright: #272b3c;
-    --sn-surface-variant: #1a1d27;
-    --sn-on-surface: #e3e4f8;
-    --sn-on-surface-variant: #a8aabc;
-    --sn-primary: #c6c6c6;
-    --sn-secondary: #8596ff;
-    --sn-primary-container: #3a3a3a;
-    --sn-outline-variant: #444757;
-    --radius: 0.625rem;
-}
+/* ---------------------------------------------------------------------------
+   Base
+   --------------------------------------------------------------------------- */
 
 @layer base {
   * {
-    @apply border-border outline-ring/50;
+    @apply border-border;
   }
 
   html {
-    @apply bg-background text-foreground font-sans;
+    background-color: var(--sn-bg);
+    color: var(--sn-fg);
+    font-family: var(--sn-font-body);
+    scroll-behavior: smooth;
+    -webkit-text-size-adjust: 100%;
   }
 
   body {
-    @apply bg-background text-foreground;
+    background-color: var(--sn-bg);
+    color: var(--sn-fg);
+    font-size: var(--sn-text-body);
+    font-weight: 300;
+    line-height: 1.7;
+    margin: 0;
     min-height: 100%;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  ::selection {
+    background-color: color-mix(in srgb, var(--sn-accent) 34%, transparent);
+    color: var(--sn-fg);
+  }
+
+  :focus-visible {
+    border-radius: 2px;
+    outline: 2px solid var(--sn-accent-bright);
+    outline-offset: 3px;
+  }
+
+  h1,
+  h2,
+  h3 {
+    font-family: var(--sn-font-heading);
+    font-weight: 400;
+    line-height: 1.15;
+    text-wrap: balance;
+  }
+
+  p {
+    text-wrap: pretty;
+  }
+
+  /* Japanese line-breaking rules (kinsoku): keep small kana and the long-vowel
+     mark off the start of a line. Harmless for Latin text. */
+  h1,
+  h2,
+  h3,
+  p,
+  li {
+    line-break: strict;
+    overflow-wrap: break-word;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+    }
   }
 }
 
-@layer base {
-  html {
-    scroll-behavior: smooth;
-  }
-}
+/* ---------------------------------------------------------------------------
+   Layout primitives
+   --------------------------------------------------------------------------- */
 
 @layer components {
-  .section-anchor {
-    scroll-margin-top: 7rem;
+  .shell {
+    margin-inline: auto;
+    max-width: var(--sn-measure);
+    padding-inline: var(--sn-gutter);
+    width: 100%;
   }
 
-  .section-kicker {
-    color: var(--sn-secondary);
-    font-family: var(--sn-font-heading);
-    font-size: 0.8rem;
-    font-weight: 600;
-    letter-spacing: 0.22em;
-    text-transform: uppercase;
-  }
-
-  .section-link {
+  .section {
+    padding-block: var(--sn-section-gap);
     position: relative;
-  }
-
-  .section-link[data-active="true"] {
-    color: var(--sn-secondary);
-  }
-
-  .publication-card {
-    background: color-mix(in srgb, var(--sn-surface-container-low) 88%, var(--sn-surface));
-    transition: background-color 180ms ease, transform 180ms ease;
-  }
-
-  .publication-card:hover {
-    background: color-mix(in srgb, var(--sn-surface-container-high) 82%, var(--sn-surface));
-    transform: translateY(-4px);
-  }
-
-  .publication-doi {
-    align-items: center;
-    background: color-mix(in srgb, var(--sn-surface-variant) 78%, transparent);
-    border-radius: 9999px;
-    color: var(--sn-on-surface-variant);
-    display: inline-flex;
-    font-family: var(--sn-font-heading);
-    font-size: 0.8rem;
-    font-weight: 600;
-    letter-spacing: 0.16em;
-    padding: 0.7rem 1rem;
-    text-transform: uppercase;
-    transition: color 180ms ease, background-color 180ms ease, transform 180ms ease;
-  }
-
-  .publication-doi:hover,
-  .publication-doi:focus-visible {
-    background: color-mix(in srgb, var(--sn-surface-container-highest) 88%, transparent);
-    color: var(--sn-secondary);
-    transform: translateY(-1px);
-  }
-
-  .blog-card,
-  .blog-fallback {
-    background: color-mix(in srgb, var(--sn-surface-container-highest) 74%, var(--sn-surface));
-    transition: background-color 180ms ease, transform 180ms ease;
-  }
-
-  .blog-card:hover,
-  .blog-card:focus-visible {
-    background: color-mix(in srgb, var(--sn-surface-container-highest) 92%, var(--sn-surface));
-    transform: translateY(-4px);
-  }
-
-  .footer-icon-link {
-    align-items: center;
-    background: color-mix(in srgb, var(--sn-surface-container-highest) 72%, transparent);
-    border-radius: 9999px;
-    color: var(--sn-on-surface-variant);
-    display: inline-flex;
-    height: 2.75rem;
-    justify-content: center;
-    transition: color 180ms ease, background-color 180ms ease, transform 180ms ease;
-    width: 2.75rem;
-  }
-
-  .footer-icon-link:hover,
-  .footer-icon-link:focus-visible {
-    background: color-mix(in srgb, var(--sn-surface-container-highest) 100%, transparent);
-    color: var(--sn-secondary);
-    transform: translateY(-1px);
-  }
-
-  .footer-icon-link svg {
-    height: 1.15rem;
-    width: 1.15rem;
+    scroll-margin-top: 4rem;
   }
 
   .sr-only {
     border: 0;
-    clip: rect(0, 0, 0, 0);
+    clip-path: inset(50%);
     height: 1px;
     margin: -1px;
     overflow: hidden;
@@ -186,5 +216,263 @@
     position: absolute;
     white-space: nowrap;
     width: 1px;
+  }
+
+  .skip-link {
+    background: var(--sn-bg-elevated);
+    border: 1px solid var(--sn-accent);
+    color: var(--sn-fg);
+    left: 1rem;
+    padding: 0.6rem 1rem;
+    position: fixed;
+    top: -6rem;
+    z-index: 100;
+    transition: top var(--sn-duration) var(--sn-ease);
+  }
+
+  .skip-link:focus-visible {
+    top: 1rem;
+  }
+
+  /* -------------------------------------------------------------------------
+     Terminal motif
+     ------------------------------------------------------------------------- */
+
+  .mono {
+    font-family: var(--sn-font-mono);
+    font-size: var(--sn-text-meta);
+    font-weight: 400;
+    letter-spacing: 0.04em;
+    line-height: 1.5;
+  }
+
+  .prompt {
+    align-items: baseline;
+    color: var(--sn-accent);
+    display: flex;
+    gap: 0.6ch;
+  }
+
+  .prompt::before {
+    color: var(--sn-accent);
+    content: "$";
+    opacity: 0.75;
+  }
+
+  /* The `_` that trails the hero tagline. */
+  .cursor {
+    background-color: var(--sn-accent);
+    display: inline-block;
+    height: max(2px, 0.08em);
+    margin-left: 0.1em;
+    translate: 0 0.12em;
+    width: 0.62ch;
+  }
+
+  .cursor[data-blink] {
+    animation: sn-blink 1.1s step-end infinite;
+  }
+
+  .rule {
+    background-color: var(--sn-line);
+    border: 0;
+    height: 1px;
+    margin: 0;
+    width: 100%;
+  }
+
+  /* -------------------------------------------------------------------------
+     Links
+     ------------------------------------------------------------------------- */
+
+  .link {
+    background-image: linear-gradient(currentColor, currentColor);
+    background-position: 0 100%;
+    background-repeat: no-repeat;
+    background-size: 0% 1px;
+    color: var(--sn-accent-bright);
+    padding-bottom: 0.12em;
+    transition: background-size 220ms var(--sn-ease), color var(--sn-duration-fast) var(--sn-ease);
+  }
+
+  .link:hover,
+  .link:focus-visible {
+    background-size: 100% 1px;
+  }
+
+  /* Mono chip with terminal brackets that resolve on hover. */
+  .chip {
+    align-items: center;
+    border: 1px solid var(--sn-line);
+    color: var(--sn-fg-muted);
+    display: inline-flex;
+    gap: 0.6ch;
+    padding: 0.5rem 0.9rem;
+    transition:
+      border-color var(--sn-duration) var(--sn-ease),
+      color var(--sn-duration) var(--sn-ease),
+      background-color var(--sn-duration) var(--sn-ease);
+  }
+
+  .chip::before {
+    color: var(--sn-accent);
+    content: "[";
+    opacity: 0;
+    transition: opacity var(--sn-duration) var(--sn-ease);
+  }
+
+  .chip::after {
+    color: var(--sn-accent);
+    content: "]";
+    opacity: 0;
+    transition: opacity var(--sn-duration) var(--sn-ease);
+  }
+
+  .chip:hover,
+  .chip:focus-visible {
+    background-color: color-mix(in srgb, var(--sn-accent) 8%, transparent);
+    border-color: color-mix(in srgb, var(--sn-accent) 55%, var(--sn-line));
+    color: var(--sn-fg);
+  }
+
+  .chip:hover::before,
+  .chip:hover::after,
+  .chip:focus-visible::before,
+  .chip:focus-visible::after {
+    opacity: 1;
+  }
+
+  .chip svg {
+    height: 1rem;
+    width: 1rem;
+  }
+
+  /* -------------------------------------------------------------------------
+     Entry rows (publications / posts)
+     ------------------------------------------------------------------------- */
+
+  .entry {
+    border-top: 1px solid var(--sn-line);
+    isolation: isolate;
+    padding-block: clamp(1.75rem, 1rem + 2vw, 2.5rem);
+    position: relative;
+  }
+
+  .entry:last-child {
+    border-bottom: 1px solid var(--sn-line);
+  }
+
+  /* The accent hairline that draws left-to-right over the row's own rule. */
+  .entry-rule {
+    background-color: var(--sn-accent);
+    height: 1px;
+    inset-block-start: -1px;
+    inset-inline-start: 0;
+    pointer-events: none;
+    position: absolute;
+    transition: width 420ms var(--sn-ease);
+    width: 0;
+  }
+
+  .entry:hover .entry-rule,
+  .entry:focus-within .entry-rule {
+    width: 100%;
+  }
+
+  /* Makes the whole row clickable without nesting interactive elements. */
+  .stretched-link::after {
+    content: "";
+    inset: 0;
+    position: absolute;
+    z-index: 0;
+  }
+
+  .entry-title {
+    font-size: clamp(1.25rem, 1.05rem + 0.9vw, 1.75rem);
+    line-height: 1.25;
+    transition: color var(--sn-duration) var(--sn-ease);
+  }
+
+  .entry:hover .entry-title,
+  .entry:focus-within .entry-title {
+    color: var(--sn-accent-bright);
+  }
+
+  .entry-arrow {
+    color: var(--sn-fg-muted);
+    transition:
+      color var(--sn-duration) var(--sn-ease),
+      translate var(--sn-duration) var(--sn-ease);
+  }
+
+  .entry:hover .entry-arrow,
+  .entry:focus-within .entry-arrow {
+    color: var(--sn-accent-bright);
+    translate: 0.2rem -0.2rem;
+  }
+
+  /* Secondary links inside a row must sit above the stretched overlay. */
+  .entry-aside {
+    position: relative;
+    z-index: 1;
+  }
+
+  /* -------------------------------------------------------------------------
+     Section indicator
+     ------------------------------------------------------------------------- */
+
+  .indicator-link {
+    color: var(--sn-fg-muted);
+    display: block;
+    opacity: 0.55;
+    padding-block: 0.3rem;
+    transition:
+      color var(--sn-duration) var(--sn-ease),
+      opacity var(--sn-duration) var(--sn-ease);
+  }
+
+  .indicator-link:hover,
+  .indicator-link:focus-visible {
+    color: var(--sn-fg);
+    opacity: 1;
+  }
+
+  .indicator-link[aria-current="true"] {
+    color: var(--sn-accent-bright);
+    opacity: 1;
+  }
+}
+
+/* ---------------------------------------------------------------------------
+   Scroll-reveal choreography
+
+   The hidden start state is applied only once JS has confirmed motion is
+   wanted (html.js-motion), so content is never trapped invisible when
+   scripting or the animation module fails.
+   --------------------------------------------------------------------------- */
+
+.js-motion [data-reveal] {
+  opacity: 0;
+  transform: translateY(12px);
+}
+
+.js-motion [data-reveal-char] {
+  opacity: 0;
+}
+
+@keyframes sn-blink {
+  0%,
+  60% {
+    opacity: 1;
+  }
+  61%,
+  100% {
+    opacity: 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cursor[data-blink] {
+    animation: none;
   }
 }

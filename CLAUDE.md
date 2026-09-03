@@ -12,32 +12,72 @@ pnpm deploy        # Build then deploy to Cloudflare Workers
 pnpm generate-types  # Regenerate Cloudflare Worker types (worker-configuration.d.ts)
 ```
 
-No test suite is configured.
+No test suite is configured. CI runs `pnpm build` only.
 
 ## Architecture
 
-Personal portfolio site (single-page) built with **Astro 6 + React 19 + Tailwind CSS v4 + shadcn/ui**, deployed to **Cloudflare Workers** via `@astrojs/cloudflare`.
+Personal portfolio site (single page) built with **Astro 7 + Tailwind CSS v4**, deployed to
+**Cloudflare Workers** via `@astrojs/cloudflare`. Output is `static`, so everything below
+happens at build time.
 
 ### Data flow
 
 `src/pages/index.astro` is the only route. At build time it:
 1. Queries the `publications` content collection (`src/content/publications/*.yaml`) and sorts by year desc, then title asc.
-2. Calls `fetchZennArticles("rmuraix")` in `src/lib/zenn.ts`, which hits `https://zenn.dev/api/articles` and returns the top 3 for display.
+2. Calls `fetchZennArticles("rmuraix")` in `src/lib/zenn.ts`, which hits `https://zenn.dev/api/articles`; the top 3 are featured.
+
+Shared profile copy and link data live in `src/lib/site.ts` — edit there, not in the components.
 
 ### Component model
 
-- **Astro components** (`.astro`) — used for all sections and the footer; zero client-side JS by default.
-- **React components** (`.tsx`) — only `SiteHeader` uses React with `client:load` hydration. shadcn/ui components live in `src/components/ui/`.
+Every component is a `.astro` file and the page ships **no framework JavaScript**. React,
+`@astrojs/react` and `src/components/ui/` (shadcn/ui, `radix-nova` style, `neutral` base) are kept
+for future islands but nothing currently hydrates.
+
+The only client script is `src/scripts/motion.ts` (~3.8 kB gzip), imported from `Layout.astro`.
+
+### Design system
+
+See `docs/design.md` for the full spec. In short: near-black background, Fraunces headings,
+Inter body, JetBrains Mono for metadata, one electric-blue accent, and terminal details
+(`$ section` prompts, a blinking hero cursor, mono dates and DOIs).
+
+Tokens live at `:root` in `src/styles/global.css` (`--sn-*`) and are re-exported through
+`@theme inline` for Tailwind. Semantic aliases are namespaced (`--color-ink`, `--color-brand`, …)
+so they cannot collide with shadcn's token names.
+
+### Animation contract
+
+`src/scripts/motion.ts` uses Motion (`motion/mini`'s `animate` plus `inView`) and is driven
+entirely by data attributes:
+
+- `data-reveal` — fade + rise when scrolled into view; elements crossing the viewport
+  together are staggered as one burst.
+- `data-reveal-delay="0.2"` — extra delay in seconds.
+- `data-reveal-after-type` — in the hero, wait for the typewriter to finish first.
+- `data-reveal-char` — one character of the typed headline.
+- `data-indicator-for="<section id>"` — section-indicator link, gets `aria-current`.
+
+The hidden start state applies **only** under `html.js-motion`, a class set by an inline
+`<head>` script in `Layout.astro` when `prefers-reduced-motion` is not `reduce`. That script
+also arms a 2.5 s watchdog that strips the class if `motion.ts` never runs, so content is never
+trapped invisible. Keep that contract intact when adding animations.
 
 ### Content collections
 
-Defined in `src/content.config.ts` with Zod. Each publication YAML must have `title`, `authors[]`, `venue`, `year`, `url`; optional `doi`, `abstract`, `pdfUrl`.
+Defined in `src/content.config.ts` with Zod. Each publication YAML must have `title`,
+`authors[]`, `venue`, `year`, `url`; optional `doi` (bare identifier, linked via `doi.org`),
+`abstract`, `pdfUrl`.
 
 ### Styling
 
-Tailwind CSS v4 is loaded via the Vite plugin (`@tailwindcss/vite`). shadcn/ui uses the `radix-nova` style with `neutral` base color and CSS variables. Global styles and design tokens are in `src/styles/global.css`.
+Tailwind CSS v4 is loaded via the Vite plugin (`@tailwindcss/vite`). Global styles, design
+tokens and the component layer are all in `src/styles/global.css`.
 
-Fonts are loaded via `astro/assets` `Font` component with CSS variables `--sn-font-heading` (Space Grotesk) and `--sn-font-body` (Manrope).
+Fonts are self-hosted through the `astro:assets` `Font` component with CSS variables
+`--sn-font-heading` (Fraunces), `--sn-font-body` (Inter) and `--sn-font-mono` (JetBrains Mono),
+configured in `astro.config.mjs`. Japanese fallbacks are **system** fonts on purpose — the site
+content is English and JP webfonts would dominate the payload.
 
 ### Path alias
 
@@ -45,4 +85,6 @@ Fonts are loaded via `astro/assets` `Font` component with CSS variables `--sn-fo
 
 ### Cloudflare deployment
 
-`wrangler.jsonc` configures the Worker. The `global_fetch_strictly_public` compatibility flag is required for external API calls (Zenn) inside the Worker runtime. Run `pnpm generate-types` after changing `wrangler.jsonc` to keep `worker-configuration.d.ts` in sync.
+`wrangler.jsonc` configures the Worker. The `global_fetch_strictly_public` compatibility flag is
+required for external API calls (Zenn) inside the Worker runtime. Run `pnpm generate-types` after
+changing `wrangler.jsonc` to keep `worker-configuration.d.ts` in sync.
