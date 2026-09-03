@@ -139,22 +139,26 @@ HCAI Institute (hcaii.com) の「大きなタイポグラフィ」「スクロ�
 
 仕様からの意図的な差分と、その理由。
 
-### 10.1 Motion は React ではなくバニラAPIで導入
+### 10.1 Motion は React ではなくバニラAPIで導入し、Reactそのものを削除した
 
-仕様の初稿は Motion を React コンポーネント（`client:visible`）としてAstroに島形式で入れる想定だったが、
-実装では **`motion/mini` の `animate` + `inView`** をバニラJSで使い、Reactは一切ハイドレートしない。
+仕様の §8 は Motion を React コンポーネント（`client:visible`）としてAstroに島形式で入れる想定だったが、
+実装では **`motion/mini` の `animate` + `inView`** をバニラJSで使い、Reactを一切使わない。
 
 - React + react-dom + Motion for React ≒ 90 kB gzip に対し、現状のクライアントJSは **3.8 kB gzip**（全ページ合計）
 - ハイドレーション待ちがないので、Heroのタイプ演出が「Reactが読み込まれる前」に始まる
 - 演出対象が opacity / transform だけなので、WAAPI専用の `motion/mini` で十分
 
-`@astrojs/react` と `src/components/ui/` は将来の島のために残してあるが、現状は何もハイドレートしない。
 そのため §8 の「ハイドレーション戦略（`client:visible` / `client:load`）」と §9 の `useReducedMotion()` は
 未使用。reduced-motion は `<head>` のインラインスクリプト（CSSメディアクエリ）で検知している。
 
-**副作用**: Reactの島が1つも無いため、`@astrojs/react` が出力する `dist/client/_astro/client.*.js`
-（191 kB / 59 kB gzip）はどこからも参照されない死んだアセットとして残る。ユーザーには配信されないが、
-Workerのアセットバンドルには含まれる。島を使う予定が無いなら `@astrojs/react` ごと外せる。
+**当初は `@astrojs/react` と shadcn/ui を「将来の島のため」に残していたが、後に削除した。**
+島が1つも無い状態では `@astrojs/react` が参照されない `client.*.js`（191 kB）をdistに残すだけで、
+`components.json` と `src/components/ui/button.tsx` も誰も使わない死んだ足場だった。
+依存は16個から6個になり、CSSは 7.8 kB → 5.4 kB gzip に減った。
+削除の前後で全ページのスクリーンショットと computed style を突き合わせ、**描画差分ゼロ**を確認している。
+
+UIフレームワークが必要になった時点で `astro add react` と `shadcn init` をやり直せばよく、
+使う当てのない足場を抱え続ける理由は無い。
 
 ### 10.2 日本語フォントはシステムフォント
 

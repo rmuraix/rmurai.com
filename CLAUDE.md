@@ -20,6 +20,11 @@ Personal portfolio site (single page) built with **Astro 7 + Tailwind CSS v4**, 
 **Cloudflare Workers** via `@astrojs/cloudflare`. Output is `static`, so everything below
 happens at build time.
 
+There is **no UI framework**. React, shadcn/ui and their supporting packages were removed
+once nothing hydrated; the runtime dependency list is Astro, the Cloudflare adapter, the
+sitemap integration, Tailwind and Motion. Do not reintroduce a framework for a single
+animation — see the animation contract below for how motion is done here.
+
 ### Data flow
 
 `src/pages/index.astro` is the only route. At build time it:
@@ -30,11 +35,8 @@ Shared profile copy and link data live in `src/lib/site.ts` — edit there, not 
 
 ### Component model
 
-Every component is a `.astro` file and the page ships **no framework JavaScript**. React,
-`@astrojs/react` and `src/components/ui/` (shadcn/ui, `radix-nova` style, `neutral` base) are kept
-for future islands but nothing currently hydrates.
-
-The only client script is `src/scripts/motion.ts` (~3.8 kB gzip), imported from `Layout.astro`.
+Every component is a `.astro` file. The page ships **no framework JavaScript at all** — the
+only client script is `src/scripts/motion.ts` (~3.8 kB gzip), imported from `Layout.astro`.
 
 ### Design system
 
@@ -42,9 +44,10 @@ See `docs/design.md` for the full spec. In short: near-black background, Fraunce
 Inter body, JetBrains Mono for metadata, one electric-blue accent, and terminal details
 (`$ section` prompts, a blinking hero cursor, mono dates and DOIs).
 
-Tokens live at `:root` in `src/styles/global.css` (`--sn-*`) and are re-exported through
-`@theme inline` for Tailwind. Semantic aliases are namespaced (`--color-ink`, `--color-brand`, …)
-so they cannot collide with shadcn's token names.
+Tokens live at `:root` in `src/styles/global.css` (`--sn-*`) and the handful Tailwind needs are
+re-exported through `@theme inline` as `--color-ink`, `--color-ink-muted`, `--color-hair`,
+`--color-brand`, `--color-brand-bright`, `--color-elevated` and `--color-border`. Prefer those
+utilities (`text-ink-muted`) over arbitrary values (`text-[var(--sn-fg-muted)]`).
 
 ### Accessibility invariants
 

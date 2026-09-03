@@ -1,8 +1,4 @@
 @import "tailwindcss";
-@import "tw-animate-css";
-@import "shadcn/tailwind.css";
-
-@custom-variant dark (&:is(.dark *));
 
 /* ---------------------------------------------------------------------------
    Design tokens — "quiet intelligence x terminal precision"
@@ -36,30 +32,15 @@
     --sn-section-gap: clamp(7.5rem, 4rem + 12vw, 12.5rem);
     --sn-gutter: clamp(1.5rem, 1rem + 3vw, 4.5rem);
     --sn-measure: 76rem;
-
-    /* shadcn/ui bridge — keeps generated UI primitives on the same palette */
-    --sn-surface: var(--sn-bg);
-    --sn-surface-container-lowest: #000000;
-    --sn-surface-container-low: var(--sn-bg-elevated);
-    --sn-surface-container-high: #141417;
-    --sn-surface-container-highest: #17171b;
-    --sn-surface-bright: #1d1d22;
-    --sn-surface-variant: #131316;
-    --sn-on-surface: var(--sn-fg);
-    --sn-on-surface-variant: var(--sn-fg-muted);
-    --sn-primary: var(--sn-fg);
-    --sn-secondary: var(--sn-accent);
-    --sn-primary-container: #17171b;
-    --sn-outline-variant: var(--sn-line);
-    --radius: 0.25rem;
 }
 
 @theme inline {
+    /* The three type roles. --font-sans and --font-mono also back Tailwind's
+       own preflight defaults. */
     --font-sans: var(--sn-font-body);
     --font-heading: var(--sn-font-heading);
     --font-mono: var(--sn-font-mono);
 
-    /* Namespaced aliases so they cannot collide with shadcn's token names. */
     --color-ink: var(--sn-fg);
     --color-ink-muted: var(--sn-fg-muted);
     --color-hair: var(--sn-line);
@@ -67,46 +48,9 @@
     --color-brand-bright: var(--sn-accent-bright);
     --color-elevated: var(--sn-bg-elevated);
 
-    --ease-out-expo: var(--sn-ease);
-
-    --color-sidebar-ring: var(--sn-accent);
-    --color-sidebar-border: var(--sn-line);
-    --color-sidebar-accent-foreground: var(--sn-on-surface);
-    --color-sidebar-accent: var(--sn-surface-variant);
-    --color-sidebar-primary-foreground: var(--sn-surface);
-    --color-sidebar-primary: var(--sn-secondary);
-    --color-sidebar-foreground: var(--sn-on-surface);
-    --color-sidebar: var(--sn-surface-container-low);
-    --color-chart-5: var(--sn-surface-bright);
-    --color-chart-4: var(--sn-primary-container);
-    --color-chart-3: var(--sn-surface-container-highest);
-    --color-chart-2: var(--sn-secondary);
-    --color-chart-1: var(--sn-primary);
-    --color-ring: var(--sn-accent-bright);
-    --color-input: var(--sn-line);
+    /* Backs `@apply border-border`, so a bare border utility picks up the
+       hairline instead of Tailwind's currentColor default. */
     --color-border: var(--sn-line);
-    --color-destructive: #b34b5c;
-    --color-accent-foreground: var(--sn-on-surface);
-    --color-accent: var(--sn-surface-container-highest);
-    --color-muted-foreground: var(--sn-on-surface-variant);
-    --color-muted: var(--sn-surface-variant);
-    --color-secondary-foreground: var(--sn-on-surface);
-    --color-secondary: var(--sn-secondary);
-    --color-primary-foreground: var(--sn-surface);
-    --color-primary: var(--sn-primary);
-    --color-popover-foreground: var(--sn-on-surface);
-    --color-popover: var(--sn-surface-container-highest);
-    --color-card-foreground: var(--sn-on-surface);
-    --color-card: var(--sn-surface-container-high);
-    --color-foreground: var(--sn-on-surface);
-    --color-background: var(--sn-surface);
-    --radius-sm: calc(var(--radius) * 0.6);
-    --radius-md: calc(var(--radius) * 0.8);
-    --radius-lg: var(--radius);
-    --radius-xl: calc(var(--radius) * 1.4);
-    --radius-2xl: calc(var(--radius) * 1.8);
-    --radius-3xl: calc(var(--radius) * 2.2);
-    --radius-4xl: calc(var(--radius) * 2.6);
 }
 
 /* ---------------------------------------------------------------------------

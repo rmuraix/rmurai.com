@@ -4,7 +4,6 @@ import { defineConfig, fontProviders } from "astro/config";
 import tailwindcss from "@tailwindcss/vite";
 import cloudflare from "@astrojs/cloudflare";
 
-import react from "@astrojs/react";
 import sitemap from "@astrojs/sitemap";
 
 /**
@@ -61,5 +60,5 @@ export default defineConfig({
     plugins: [tailwindcss()],
   },
 
-  integrations: [react(), sitemap()],
+  integrations: [sitemap()],
 });
