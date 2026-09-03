@@ -65,11 +65,14 @@ if (root.classList.contains("js-motion")) {
   for (const element of document.querySelectorAll("[data-reveal]")) {
     if (hero?.contains(element)) continue;
 
-    inView(
+    let stop: (() => void) | undefined;
+
+    stop = inView(
       element,
       () => {
         if (revealed.has(element)) return;
         revealed.add(element);
+        stop?.();
 
         const now = performance.now();
         if (now > burstDeadline) burstIndex = 0;

@@ -14,14 +14,14 @@ const { command, title, count } = Astro.props;
 	<div class="flex items-baseline gap-[clamp(1rem,3vw,2rem)]">
 		<p class="mono prompt shrink-0">{command}</p>
 		<span class="rule mt-[-0.35em] min-w-0 flex-1" aria-hidden="true"></span>
-		{count && <p class="mono shrink-0 text-[var(--sn-fg-muted)]">{count}</p>}
+		{count && <p class="mono shrink-0 text-ink-muted">{count}</p>}
 	</div>
 
 	<h2 class="mt-[clamp(1.25rem,0.9rem+1.4vw,2rem)] max-w-[22ch] text-[length:var(--sn-text-section)] tracking-[-0.015em]">
 		{title}
 	</h2>
 
-	<div class="mt-6 max-w-[62ch] text-[length:var(--sn-text-body)] leading-[1.7] text-[var(--sn-fg-muted)]">
+	<div class="mt-6 max-w-[62ch] text-[length:var(--sn-text-body)] leading-[1.7] text-ink-muted">
 		<slot />
 	</div>
 </header>

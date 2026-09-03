@@ -117,14 +117,19 @@ HCAI Institute (hcaii.com) の「大きなタイポグラフィ」「スクロ�
 
 ## 8. 技術スタック
 
+> この節は当初仕様のまま。実装がここから外れた点は §10 に記録している。
+
 - **フレームワーク**: Astro（静的生成、現行踏襲）
 - **スタイリング**: Tailwind CSS（ユーティリティクラスでレイアウト・色・タイプスケールを管理）
-- **アニメーション**: [Motion](https://motion.dev)（旧Framer Motion）
-- **原則**: ページ全体をReact化しない。アニメーションが必要な箇所だけを最小限のコードで実装し、それ以外は静的なAstro/Tailwindのまま保つ
+- **アニメーション**: [Motion](https://motion.dev)（旧Framer Motion）をReactコンポーネントとしてAstroに部分導入
+  - 対象: Hero のタイプライター演出、セクションのスクロールフェード（`whileInView`）、Publications/Blogリストのスタッガー表示（`staggerChildren`）
+  - 対象外（Motion不要）: リンクhoverの下線・グローなど単純なCSSトランジションで済む箇所 → Tailwindの`transition`ユーティリティで実装
+- **ハイドレーション戦略**: 基本は `client:visible`（画面内に入ってから読み込み、パフォーマンス維持）。Hero部分のみ即時演出が必要なら `client:load` を検討
+- **原則**: ページ全体をReact化しない。アニメーションが必要な島（Hero / リスト部分）だけをコンポーネント化し、それ以外は静的なAstro/Tailwindのまま保つ
 
 ## 9. アクセシビリティ・その他実装メモ
 
-- `prefers-reduced-motion: reduce` ではタイプ演出・スタッガーを無効化し、即時表示にフォールバック
+- `prefers-reduced-motion: reduce` は Motion の `useReducedMotion()` フックで検知し、タイプ演出・スタッガーを無効化してフェードのみ or 即時表示にフォールバック
 - 等幅フォントの日本語混在に注意（日本語部分は等幅を無理に当てない）
 - フォーカス状態（キーボード操作）も差し色でわかりやすく表示する
 
@@ -144,6 +149,12 @@ HCAI Institute (hcaii.com) の「大きなタイポグラフィ」「スクロ�
 - 演出対象が opacity / transform だけなので、WAAPI専用の `motion/mini` で十分
 
 `@astrojs/react` と `src/components/ui/` は将来の島のために残してあるが、現状は何もハイドレートしない。
+そのため §8 の「ハイドレーション戦略（`client:visible` / `client:load`）」と §9 の `useReducedMotion()` は
+未使用。reduced-motion は `<head>` のインラインスクリプト（CSSメディアクエリ）で検知している。
+
+**副作用**: Reactの島が1つも無いため、`@astrojs/react` が出力する `dist/client/_astro/client.*.js`
+（191 kB / 59 kB gzip）はどこからも参照されない死んだアセットとして残る。ユーザーには配信されないが、
+Workerのアセットバンドルには含まれる。島を使う予定が無いなら `@astrojs/react` ごと外せる。
 
 ### 10.2 日本語フォントはシステムフォント
 

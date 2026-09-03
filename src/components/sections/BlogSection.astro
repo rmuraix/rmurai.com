@@ -22,7 +22,7 @@ function formatDate(value: string) {
 }
 ---
 
-<section id="blog" data-section class="section bg-[var(--sn-bg-elevated)]">
+<section id="blog" data-section class="section bg-elevated">
 	<div class="shell">
 		<SectionHeading
 			command="blog"
@@ -41,7 +41,7 @@ function formatDate(value: string) {
 							<span class="entry-rule" aria-hidden="true" />
 
 							<div class="grid gap-x-[clamp(1.5rem,4vw,3.5rem)] gap-y-4 md:grid-cols-[6rem_1fr]">
-								<p class="mono pt-[0.4em] text-[var(--sn-accent)] md:text-right">
+								<p class="mono pt-[0.4em] text-brand md:text-right">
 									<time datetime={toIsoDate(article.publishedAt)}>
 										{formatDate(article.publishedAt)}
 									</time>
@@ -68,7 +68,7 @@ function formatDate(value: string) {
 					))}
 				</ol>
 			) : (
-				<p class="max-w-[60ch] text-[length:var(--sn-text-body)] leading-[1.7] text-[var(--sn-fg-muted)]" data-reveal>
+				<p class="max-w-[60ch] text-[length:var(--sn-text-body)] leading-[1.7] text-ink-muted" data-reveal>
 					The feed could not be reached at build time. The full archive is still on Zenn.
 				</p>
 			)

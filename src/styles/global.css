@@ -273,6 +273,11 @@
     animation: sn-blink 1.1s step-end infinite;
   }
 
+  /* WCAG 2.5.8 (24x24 CSS px): mono links are 19.5px tall on their own. */
+  .tap {
+    padding-block: 0.2rem;
+  }
+
   .rule {
     background-color: var(--sn-line);
     border: 0;
@@ -421,20 +426,18 @@
      Section indicator
      ------------------------------------------------------------------------- */
 
+  /* Inactive labels stay on --sn-fg-muted (5.75:1). Dimming them further
+     with opacity dropped them to 2.48:1, below WCAG AA for text. */
   .indicator-link {
     color: var(--sn-fg-muted);
     display: block;
-    opacity: 0.55;
     padding-block: 0.3rem;
-    transition:
-      color var(--sn-duration) var(--sn-ease),
-      opacity var(--sn-duration) var(--sn-ease);
+    transition: color var(--sn-duration) var(--sn-ease);
   }
 
   .indicator-link:hover,
   .indicator-link:focus-visible {
     color: var(--sn-fg);
-    opacity: 1;
   }
 
   .indicator-link[aria-current="true"] {
@@ -474,5 +477,35 @@
 @media (prefers-reduced-motion: reduce) {
   .cursor[data-blink] {
     animation: none;
+  }
+}
+
+/* ---------------------------------------------------------------------------
+   Print — a publication list is something people actually print.
+   --------------------------------------------------------------------------- */
+
+@media print {
+  :root {
+    color-scheme: light;
+    --sn-bg: #ffffff;
+    --sn-bg-elevated: #ffffff;
+    --sn-fg: #111111;
+    --sn-fg-muted: #444444;
+    --sn-line: #cccccc;
+    --sn-accent: #1a3fb8;
+    --sn-accent-bright: #1a3fb8;
+    --sn-section-gap: 1.5rem;
+    --sn-gutter: 0;
+  }
+
+  .skip-link,
+  .cursor,
+  .entry-arrow,
+  [data-indicator-for] {
+    display: none !important;
+  }
+
+  .entry {
+    break-inside: avoid;
   }
 }

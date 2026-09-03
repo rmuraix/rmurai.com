@@ -5,13 +5,13 @@ import { site, socialLinks } from '@/lib/site';
 const currentYear = new Date().getFullYear();
 ---
 
-<footer class="border-t border-[var(--sn-line)] py-[clamp(3rem,2rem+4vw,5rem)]">
+<footer class="border-t border-hair py-[clamp(3rem,2rem+4vw,5rem)]">
 	<div class="shell flex flex-col gap-8 sm:flex-row sm:items-end sm:justify-between">
 		<div>
-			<p class="mono text-[var(--sn-fg-muted)]">
-				<span class="text-[var(--sn-accent)]">$</span> whoami
+			<p class="mono text-ink-muted">
+				<span class="text-brand">$</span> whoami
 			</p>
-			<p class="mono mt-2 text-[var(--sn-fg)]">
+			<p class="mono mt-2 text-ink">
 				&copy; {currentYear} {site.name}
 			</p>
 		</div>
@@ -20,7 +20,7 @@ const currentYear = new Date().getFullYear();
 			{
 				socialLinks.map((link) => (
 					<a
-						class="mono link inline-flex items-center gap-2 text-[var(--sn-fg-muted)] hover:text-[var(--sn-accent-bright)]"
+						class="mono link tap inline-flex items-center gap-2 text-ink-muted hover:text-brand-bright"
 						href={link.href}
 						target="_blank"
 						rel="me noopener noreferrer"

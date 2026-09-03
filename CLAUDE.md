@@ -46,6 +46,17 @@ Tokens live at `:root` in `src/styles/global.css` (`--sn-*`) and are re-exported
 `@theme inline` for Tailwind. Semantic aliases are namespaced (`--color-ink`, `--color-brand`, …)
 so they cannot collide with shadcn's token names.
 
+### Accessibility invariants
+
+Two of these were regressions caught in review — do not undo them:
+
+- Body-adjacent text never goes below `--sn-fg-muted` (#8A8A8E, 5.75:1 on the background).
+  Dimming muted text further with `opacity` drops it under WCAG AA.
+- Small monospace links (13px, ~19.5px tall) carry `.tap` so they clear the 24x24 CSS px
+  target minimum (WCAG 2.5.8).
+- Content must render fully without JavaScript and under `prefers-reduced-motion` — see the
+  animation contract below.
+
 ### Animation contract
 
 `src/scripts/motion.ts` uses Motion (`motion/mini`'s `animate` plus `inView`) and is driven
