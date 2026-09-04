@@ -102,6 +102,16 @@ Fonts are self-hosted through the `astro:assets` `Font` component with CSS varia
 configured in `astro.config.mjs`. Japanese fallbacks are **system** fonts on purpose — the site
 content is English and JP webfonts would dominate the payload.
 
+Each Japanese stack starts with `JP Mincho` / `JP Sans`, declared in `global.css` as the same
+system faces re-declared over the CJK ranges with `size-adjust: 92%`. Kanji fill ~0.9em of the
+em box where Latin caps reach ~0.7em, so without this a Japanese title set at the same
+`font-size` reads about a third taller than the Latin beside it. If none of the `local()`
+faces exist the rule is skipped and the plain family names further down the stack still apply.
+
+Every section sits on the same `--sn-bg`. `docs/design.md` §3 offers `#111113` as an optional
+section-divider ground, but using it on one section out of three read as an arbitrary
+exception — the `$` prompts, hairlines and 200px gaps already do the separating.
+
 ### Path alias
 
 `@/` resolves to `src/` (configured in `tsconfig.json` and `components.json`).

@@ -11,9 +11,13 @@ import sitemap from "@astrojs/sitemap";
  * English, so shipping Shippori Mincho / Noto Sans JP webfonts (multi-MB, 100+
  * unicode-range chunks) would cost far more than it returns. The stacks keep
  * the mincho/gothic pairing from the design spec for any future JP copy.
+ *
+ * "JP Mincho" / "JP Sans" lead each stack: they are declared in global.css as
+ * the same system faces re-scaled over the CJK ranges, so Japanese does not
+ * out-size the Latin it sits next to.
  */
-const jpSerif = ["Shippori Mincho", "Hiragino Mincho ProN", "Yu Mincho", "YuMincho"];
-const jpSans = ["Noto Sans JP", "Hiragino Sans", "Hiragino Kaku Gothic ProN", "Yu Gothic"];
+const jpSerif = ["JP Mincho", "Shippori Mincho", "Hiragino Mincho ProN", "Yu Mincho", "YuMincho"];
+const jpSans = ["JP Sans", "Noto Sans JP", "Hiragino Sans", "Hiragino Kaku Gothic ProN", "Yu Gothic"];
 
 // https://astro.build/config
 export default defineConfig({
