@@ -9,11 +9,6 @@ pnpm install
 pnpm dev
 ```
 
-## Design
-
-`docs/design.md` is the design spec, with the implementation deviations recorded in section 10.
-`CLAUDE.md` covers the architecture, the animation contract and the accessibility invariants.
-
 ## Content
 
 - Publications: `src/content/publications/*.yaml`
