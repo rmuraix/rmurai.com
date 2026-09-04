@@ -1,55 +1,85 @@
 ---
 import type { CollectionEntry } from 'astro:content';
+import Icon from '@/components/Icon.astro';
+import SectionHeading from '@/components/SectionHeading.astro';
 
 interface Props {
 	publications: CollectionEntry<'publications'>[];
 }
 
 const { publications } = Astro.props;
+const count = publications.length;
 ---
 
-<section
-	id="publications"
-	data-section
-	class="section-anchor bg-[color-mix(in_srgb,var(--sn-surface-container-low)_84%,var(--sn-surface))] px-6 py-24 sm:px-8 sm:py-28 lg:px-12"
->
-	<div class="mx-auto max-w-6xl space-y-10">
-		<div class="max-w-3xl space-y-4">
-			<p class="section-kicker">Publications</p>
-			<h2 class="font-heading text-4xl font-semibold tracking-[-0.03em] text-[var(--sn-primary)] sm:text-5xl">
-				Research papers and publications.
-			</h2>
-			<p class="text-base leading-8 text-[var(--sn-on-surface-variant)] sm:text-lg">
-				A selected list of papers, conference publications, and related research outputs.
-			</p>
-		</div>
+<section id="publications" data-section class="section">
+	<div class="shell">
+		<SectionHeading
+			command="publications"
+			title="Peer-reviewed papers and conference proceedings."
+			count={`${count} ${count === 1 ? 'entry' : 'entries'}`}
+		>
+			Work on Japanese sign language recognition — word-level accuracy, point-supervised
+			temporal localization, and multimodal fusion.
+		</SectionHeading>
 
-		<div class="space-y-5">
-			{publications.map((publication) => (
-				<a
-					class="publication-card block rounded-[1.75rem] px-6 py-6 sm:px-8 sm:py-7"
-					href={publication.data.url}
-					target="_blank"
-					rel="noopener noreferrer"
-				>
-					<article class="space-y-3">
-						<h3 class="max-w-4xl font-heading text-2xl font-semibold tracking-[-0.03em] text-[var(--sn-on-surface)] sm:text-[2rem]">
-							{publication.data.title}
-						</h3>
-						<p class="max-w-4xl text-sm leading-7 text-[color-mix(in_srgb,var(--sn-on-surface)_78%,var(--sn-surface))] sm:text-base">
-							{publication.data.authors.join(', ')}
-						</p>
-						<p class="text-sm uppercase tracking-[0.16em] text-[var(--sn-on-surface-variant)]">
-							{publication.data.venue} · {publication.data.year}
-						</p>
-						{publication.data.doi && (
-							<p class="text-xs tracking-[0.08em] text-[color-mix(in_srgb,var(--sn-on-surface-variant)_88%,var(--sn-surface))]">
-								DOI: {publication.data.doi}
+		<ol class="list-none p-0">
+			{
+				publications.map((publication) => (
+					<li class="entry" data-reveal>
+						<span class="entry-rule" aria-hidden="true" />
+
+						<div class="grid gap-x-[clamp(1.5rem,4vw,3.5rem)] gap-y-4 md:grid-cols-[6rem_1fr]">
+							<p class="mono pt-[0.4em] text-brand md:text-right">
+								{publication.data.year}
 							</p>
-						)}
-					</article>
-				</a>
-			))}
-		</div>
+
+							<div class="min-w-0">
+								<h3 class="entry-title font-normal tracking-[-0.015em]">
+									<a
+										class="stretched-link"
+										href={publication.data.url}
+										target="_blank"
+										rel="noopener noreferrer"
+									>
+										{publication.data.title}
+									</a>
+									<Icon name="arrow" class="entry-arrow ml-2 inline-block size-4 align-baseline" />
+								</h3>
+
+								<p class="mt-3 text-[0.9375rem] leading-[1.7] text-ink-muted">
+									{publication.data.authors.join(', ')}
+								</p>
+
+								<div class="mono mt-4 flex flex-wrap items-center gap-x-4 gap-y-2 text-ink-muted">
+									<span class="text-ink">{publication.data.venue}</span>
+
+									{publication.data.doi && (
+										<a
+											class="entry-aside link tap text-ink-muted hover:text-brand-bright"
+											href={`https://doi.org/${publication.data.doi}`}
+											target="_blank"
+											rel="noopener noreferrer"
+										>
+											doi:{publication.data.doi}
+										</a>
+									)}
+
+									{publication.data.pdfUrl && (
+										<a
+											class="entry-aside link tap text-ink-muted hover:text-brand-bright"
+											href={publication.data.pdfUrl}
+											target="_blank"
+											rel="noopener noreferrer"
+										>
+											pdf
+										</a>
+									)}
+								</div>
+							</div>
+						</div>
+					</li>
+				))
+			}
+		</ol>
 	</div>
 </section>

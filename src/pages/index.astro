@@ -1,27 +1,28 @@
 ---
-import Layout from '../layouts/Layout.astro';
 import { getCollection } from 'astro:content';
-import ProfileSection from '@/components/sections/ProfileSection.astro';
-import PublicationsSection from '@/components/sections/PublicationsSection.astro';
-import BlogSection from '@/components/sections/BlogSection.astro';
+import Layout from '@/layouts/Layout.astro';
+import SectionIndicator from '@/components/SectionIndicator.astro';
 import SiteFooter from '@/components/SiteFooter.astro';
+import BlogSection from '@/components/sections/BlogSection.astro';
+import HeroSection from '@/components/sections/HeroSection.astro';
+import PublicationsSection from '@/components/sections/PublicationsSection.astro';
 import { fetchZennArticles } from '@/lib/zenn';
 
-const publications = (await getCollection('publications')).sort((left, right) => {
-	return right.data.year - left.data.year || left.data.title.localeCompare(right.data.title);
-});
-const latestZennArticles = await fetchZennArticles("rmuraix");
-const featuredZennArticles = latestZennArticles.slice(0, 3);
+const publications = (await getCollection('publications')).sort(
+	(left, right) =>
+		right.data.year - left.data.year || left.data.title.localeCompare(right.data.title),
+);
+
+const zennArticles = await fetchZennArticles('rmuraix');
 ---
 
 <Layout>
-	<main class="relative overflow-x-clip">
-		<ProfileSection />
+	<SectionIndicator />
+
+	<main id="main" class="overflow-x-clip">
+		<HeroSection />
 		<PublicationsSection publications={publications} />
-		<BlogSection
-			featuredZennArticles={featuredZennArticles}
-			latestZennArticlesCount={latestZennArticles.length}
-		/>
+		<BlogSection articles={zennArticles.slice(0, 3)} totalCount={zennArticles.length} />
 	</main>
 
 	<SiteFooter />

@@ -1,0 +1,83 @@
+---
+import Icon from '@/components/Icon.astro';
+import { site, socialLinks } from '@/lib/site';
+
+// Pre-split on the server so the typed headline is real, selectable,
+// crawlable text — the animation only touches opacity.
+const nameWords = site.name.split(' ').map((word) => [...word]);
+---
+
+<section
+	id="index"
+	data-section
+	class="relative flex min-h-svh flex-col justify-center pt-[clamp(6rem,14vh,9rem)] pb-[clamp(4rem,10vh,7rem)]"
+>
+	<div class="shell">
+		<p class="mono text-ink-muted" data-reveal data-reveal-delay="0.05">
+			<span class="text-brand">~/</span>rmurai.com
+		</p>
+
+		<h1
+			aria-label={site.name}
+			class="mt-[clamp(1.5rem,1rem+2vw,2.5rem)] text-[length:var(--sn-text-hero)] font-normal leading-[0.98] tracking-[-0.03em]"
+		>
+			{
+				nameWords.map((chars, wordIndex) => (
+					<>
+						<span class="inline-block whitespace-nowrap" aria-hidden="true">
+							{chars.map((char) => (
+								<span class="inline-block" data-reveal-char>{char}</span>
+							))}
+						</span>
+						{wordIndex < nameWords.length - 1 && <span aria-hidden="true"> </span>}
+					</>
+				))
+			}
+		</h1>
+
+		<p
+			class="mt-[clamp(1.25rem,1rem+1vw,2rem)] text-[length:var(--sn-text-lead)] font-light tracking-[-0.01em] text-ink"
+			data-reveal
+			data-reveal-after-type
+			data-reveal-delay="0.2"
+		>
+			{site.role}<span class="cursor" data-blink aria-hidden="true"></span>
+		</p>
+
+		<p
+			class="mt-[clamp(1.75rem,1.25rem+1.5vw,2.75rem)] max-w-[58ch] text-[length:var(--sn-text-body)] leading-[1.75] text-ink-muted"
+			data-reveal
+			data-reveal-after-type
+			data-reveal-delay="0.34"
+		>
+			{site.bio}
+		</p>
+
+		<nav
+			class="mt-[clamp(2.5rem,2rem+2vw,3.5rem)] flex flex-wrap gap-3"
+			aria-label="Profiles"
+			data-reveal
+			data-reveal-after-type
+			data-reveal-delay="0.46"
+		>
+			{
+				socialLinks.map((link) => (
+					<a class="chip mono" href={link.href} target="_blank" rel="me noopener noreferrer">
+						<Icon name={link.icon} class="size-4" />
+						{link.label}
+					</a>
+				))
+			}
+		</nav>
+	</div>
+
+	<a
+		class="mono tap absolute inset-x-0 bottom-[clamp(1.5rem,4vh,2.75rem)] mx-auto w-fit text-ink-muted transition-colors duration-200 hover:text-brand-bright focus-visible:text-brand-bright"
+		href="#publications"
+		data-reveal
+		data-reveal-after-type
+		data-reveal-delay="0.6"
+	>
+		(scroll)
+	</a>
+</section>

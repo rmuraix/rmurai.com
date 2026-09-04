@@ -2,10 +2,22 @@
 import { defineConfig, fontProviders } from "astro/config";
 
 import tailwindcss from "@tailwindcss/vite";
-import cloudflare from '@astrojs/cloudflare';
+import cloudflare from "@astrojs/cloudflare";
 
-import react from "@astrojs/react";
 import sitemap from "@astrojs/sitemap";
+
+/**
+ * Japanese fallbacks are intentionally *system* fonts: the site content is
+ * English, so shipping Shippori Mincho / Noto Sans JP webfonts (multi-MB, 100+
+ * unicode-range chunks) would cost far more than it returns. The stacks keep
+ * the mincho/gothic pairing from the design spec for any future JP copy.
+ *
+ * "JP Mincho" / "JP Sans" lead each stack: they are declared in global.css as
+ * the same system faces re-scaled over the CJK ranges, so Japanese does not
+ * out-size the Latin it sits next to.
+ */
+const jpSerif = ["JP Mincho", "Shippori Mincho", "Hiragino Mincho ProN", "Yu Mincho", "YuMincho"];
+const jpSans = ["JP Sans", "Noto Sans JP", "Hiragino Sans", "Hiragino Kaku Gothic ProN", "Yu Gothic"];
 
 // https://astro.build/config
 export default defineConfig({
@@ -15,17 +27,36 @@ export default defineConfig({
   fonts: [
     {
       provider: fontProviders.google(),
-      name: "Space Grotesk",
+      name: "Fraunces",
       cssVariable: "--sn-font-heading",
-      weights: [400, 500, 600, 700],
+      weights: ["400 600"],
       styles: ["normal"],
+      subsets: ["latin"],
+      display: "swap",
+      fallbacks: [...jpSerif, "serif"],
+      optimizedFallbacks: true,
     },
     {
       provider: fontProviders.google(),
-      name: "Manrope",
+      name: "Inter",
       cssVariable: "--sn-font-body",
-      weights: [400, 500, 600],
+      weights: ["300 500"],
       styles: ["normal"],
+      subsets: ["latin"],
+      display: "swap",
+      fallbacks: [...jpSans, "sans-serif"],
+      optimizedFallbacks: true,
+    },
+    {
+      provider: fontProviders.google(),
+      name: "JetBrains Mono",
+      cssVariable: "--sn-font-mono",
+      weights: [400],
+      styles: ["normal"],
+      subsets: ["latin"],
+      display: "swap",
+      fallbacks: ["ui-monospace", "SFMono-Regular", "Menlo", "monospace"],
+      optimizedFallbacks: true,
     },
   ],
 
@@ -33,5 +64,5 @@ export default defineConfig({
     plugins: [tailwindcss()],
   },
 
-  integrations: [react(), sitemap()],
+  integrations: [sitemap()],
 });
