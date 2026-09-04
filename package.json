@@ -3,7 +3,7 @@
 	"type": "module",
 	"version": "0.0.1",
 	"devEngines": {
-		"runtime": { "name": "node", "version": "^24.20.0"}
+		"runtime": { "name": "node", "version": "^24.18.0"}
 	},
 	"packageManager": "pnpm@11.22.0",
 	"scripts": {
