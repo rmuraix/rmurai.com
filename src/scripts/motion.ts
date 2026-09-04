@@ -94,26 +94,42 @@ if (indicators.length > 0) {
   const byId = new Map<string, HTMLAnchorElement>();
   for (const link of indicators) byId.set(link.dataset.indicatorFor!, link);
 
-  const visible = new Set<string>();
   const order = [...byId.keys()];
+  const sections = new Map<string, Element>();
 
   const observer = new IntersectionObserver(
-    (entries) => {
-      for (const entry of entries) {
-        if (entry.isIntersecting) visible.add(entry.target.id);
-        else visible.delete(entry.target.id);
+    () => {
+      const middle = window.innerHeight / 2;
+      let current: string | undefined;
+
+      // Two sections can straddle the middle of the viewport; the one whose
+      // box contains it wins, and the nearest one wins in the gaps.
+      let bestDistance = Number.POSITIVE_INFINITY;
+
+      for (const id of order) {
+        const box = sections.get(id)?.getBoundingClientRect();
+        if (!box) continue;
+
+        const distance =
+          box.top <= middle && box.bottom >= middle ? 0 : Math.min(Math.abs(box.top - middle), Math.abs(box.bottom - middle));
+
+        if (distance < bestDistance) {
+          bestDistance = distance;
+          current = id;
+        }
       }
 
-      const current = order.find((id) => visible.has(id));
       if (!current) return;
 
       for (const [id, link] of byId) link.setAttribute("aria-current", String(id === current));
     },
-    { rootMargin: "-45% 0px -45% 0px" },
+    { threshold: [0, 0.25, 0.5, 0.75, 1] },
   );
 
   for (const id of order) {
     const section = document.getElementById(id);
-    if (section) observer.observe(section);
+    if (!section) continue;
+    sections.set(id, section);
+    observer.observe(section);
   }
 }

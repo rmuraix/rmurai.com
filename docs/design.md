@@ -183,3 +183,21 @@ Publications / Blog は角丸カードではなく、ヘアラインで区切っ
 
 仕様の「任意」項目。`lg` 以上で画面右端中央に等幅の小さなセクション名を出し、
 IntersectionObserver で `aria-current` を切り替える。`prefers-reduced-motion` でも動作する。
+
+### 10.6 OGP画像
+
+`public/og.png`（1200×630）は `docs/og-card.html` をヘッドレスブラウザで撮影して生成している。
+サイト本体が自前配信している woff2（Fraunces / Inter / JetBrains Mono）をそのまま参照するので、
+カードの字面は本文と完全に同じ。satori や resvg のような画像生成ライブラリを依存に足していない。
+名前・肩書き・パレットを変えたときだけ、`docs/og-card.html` 冒頭のコマンドで撮り直す。
+
+`twitter:card` は `summary` から `summary_large_image` に変更し、`og:image:width/height/alt` と
+JSON-LD の `image` も揃えた。
+
+### 10.7 装飾グリフはアクセシビリティツリーから外す
+
+`$ publications` の `$` は当初 `::before` の `content` だったが、擬似要素のテキストは
+スクリーンリーダーに読まれうるため `aria-hidden` の実 span に変えた（`content: "$" / ""` の
+代替テキスト構文はブラウザ対応が新しく、非対応環境で `$` ごと消えるため採用しない）。
+一方 `.chip` のホバー時ブラケット `[ ]` は装飾かつホバー時のみなので `content: "[" / ""` を使う。
+非対応環境で消えても失われるのは飾りだけ。

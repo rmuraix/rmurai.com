@@ -42,9 +42,13 @@ function formatDate(value: string) {
 
 							<div class="grid gap-x-[clamp(1.5rem,4vw,3.5rem)] gap-y-4 md:grid-cols-[6rem_1fr]">
 								<p class="mono pt-[0.4em] text-brand md:text-right">
-									<time datetime={toIsoDate(article.publishedAt)}>
-										{formatDate(article.publishedAt)}
-									</time>
+									{toIsoDate(article.publishedAt) ? (
+										<time datetime={toIsoDate(article.publishedAt)}>
+											{formatDate(article.publishedAt)}
+										</time>
+									) : (
+										article.publishedAt
+									)}
 								</p>
 
 								<div class="min-w-0">

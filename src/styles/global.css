@@ -197,9 +197,7 @@
     gap: 0.6ch;
   }
 
-  .prompt::before {
-    color: var(--sn-accent);
-    content: "$";
+  .prompt > .prompt-sigil {
     opacity: 0.75;
   }
 
@@ -265,14 +263,14 @@
 
   .chip::before {
     color: var(--sn-accent);
-    content: "[";
+    content: "[" / "";
     opacity: 0;
     transition: opacity var(--sn-duration) var(--sn-ease);
   }
 
   .chip::after {
     color: var(--sn-accent);
-    content: "]";
+    content: "]" / "";
     opacity: 0;
     transition: opacity var(--sn-duration) var(--sn-ease);
   }

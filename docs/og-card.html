@@ -1,0 +1,125 @@
+<!doctype html>
+<!--
+  Source for public/og.png (1200x630 social card).
+
+  Regenerate after changing the name, role or palette:
+    pnpm build
+    npx http-server dist/client -p 4321 &
+    # open this file in a headless browser at 1200x630 and screenshot it,
+    # e.g. npx playwright screenshot --viewport-size=1200,630 \
+    #        docs/og-card.html public/og.png
+  The @font-face rules below point at the hashed woff2 files Astro emits, so
+  serve dist/client on :4321 first (or swap the URLs for local paths).
+-->
+<meta charset="utf-8" />
+<style>
+  @font-face {
+    font-family: "OG Heading";
+    src: url("http://127.0.0.1:4321/_astro/fonts/caaebc34c5213078.woff2") format("woff2");
+    font-weight: 400 600;
+  }
+  @font-face {
+    font-family: "OG Body";
+    src: url("http://127.0.0.1:4321/_astro/fonts/e868cdf4720e9ea5.woff2") format("woff2");
+    font-weight: 300 500;
+  }
+  @font-face {
+    font-family: "OG Mono";
+    src: url("http://127.0.0.1:4321/_astro/fonts/ccfece03c51ce7f7.woff2") format("woff2");
+    font-weight: 400;
+  }
+
+  :root {
+    --bg: #0a0a0a;
+    --fg: #ededed;
+    --muted: #8a8a8e;
+    --line: #232326;
+    --accent: #2f6fff;
+  }
+
+  * { box-sizing: border-box; }
+
+  html, body { margin: 0; padding: 0; }
+
+  body {
+    background: var(--bg);
+    color: var(--fg);
+    height: 630px;
+    width: 1200px;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .frame {
+    border: 1px solid var(--line);
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    justify-content: space-between;
+    padding: 72px 80px;
+    width: 100%;
+  }
+
+  .mono {
+    font-family: "OG Mono", monospace;
+    font-size: 20px;
+    letter-spacing: 0.04em;
+  }
+
+  .path .slash { color: var(--accent); }
+
+  h1 {
+    font-family: "OG Heading", serif;
+    font-size: 112px;
+    font-weight: 400;
+    letter-spacing: -0.03em;
+    line-height: 1;
+    margin: 0 0 28px;
+  }
+
+  .role {
+    color: var(--fg);
+    font-family: "OG Body", sans-serif;
+    font-size: 34px;
+    font-weight: 300;
+    letter-spacing: -0.01em;
+    margin: 0;
+  }
+
+  .cursor {
+    background: var(--accent);
+    display: inline-block;
+    height: 3px;
+    margin-left: 4px;
+    vertical-align: 5px;
+    width: 20px;
+  }
+
+  .foot {
+    align-items: baseline;
+    color: var(--muted);
+    display: flex;
+    gap: 28px;
+  }
+
+  .foot .sigil { color: var(--accent); }
+
+  .rule {
+    background: var(--line);
+    flex: 1;
+    height: 1px;
+  }
+</style>
+<div class="frame">
+  <p class="mono path" style="color: var(--muted); margin: 0"><span class="slash">~/</span>rmurai.com</p>
+
+  <div>
+    <h1>Ryota Murai</h1>
+    <p class="role">Master's Student in Computer Vision<span class="cursor"></span></p>
+  </div>
+
+  <div class="foot mono">
+    <span><span class="sigil">$</span> publications</span>
+    <span class="rule"></span>
+    <span><span class="sigil">$</span> blog</span>
+  </div>
+</div>

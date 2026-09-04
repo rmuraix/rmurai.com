@@ -4,6 +4,7 @@ import { site, socialLinks } from '@/lib/site';
 import '@/styles/global.css';
 
 const canonical = new URL(Astro.url.pathname, Astro.site ?? site.url);
+const ogImage = new URL('/og.png', Astro.site ?? site.url);
 
 const personLd = {
 	'@context': 'https://schema.org',
@@ -12,6 +13,7 @@ const personLd = {
 	url: site.url,
 	jobTitle: site.role,
 	description: site.description,
+	image: ogImage.href,
 	sameAs: socialLinks.map((link) => link.href),
 };
 ---
@@ -34,7 +36,15 @@ const personLd = {
 		<meta property="og:title" content={`${site.name} — ${site.role}`} />
 		<meta property="og:description" content={site.description} />
 		<meta property="og:url" content={canonical.href} />
-		<meta name="twitter:card" content="summary" />
+		<meta property="og:image" content={ogImage.href} />
+		<meta property="og:image:width" content="1200" />
+		<meta property="og:image:height" content="630" />
+		<meta property="og:image:type" content="image/png" />
+		<meta
+			property="og:image:alt"
+			content={`${site.name} — ${site.role}`}
+		/>
+		<meta name="twitter:card" content="summary_large_image" />
 
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 		<link rel="icon" href="/favicon.ico" sizes="32x32" />

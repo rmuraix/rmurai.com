@@ -59,6 +59,9 @@ Two of these were regressions caught in review — do not undo them:
   target minimum (WCAG 2.5.8).
 - Content must render fully without JavaScript and under `prefers-reduced-motion` — see the
   animation contract below.
+- Decorative glyphs stay out of the accessibility tree: the `$` prompt sigil is a real
+  `aria-hidden` span, and the `.chip` hover brackets use the `content: "[" / ""` alt-text
+  form so nothing announces "left bracket GitHub right bracket".
 
 ### Animation contract
 
@@ -76,6 +79,12 @@ The hidden start state applies **only** under `html.js-motion`, a class set by a
 `<head>` script in `Layout.astro` when `prefers-reduced-motion` is not `reduce`. That script
 also arms a 2.5 s watchdog that strips the class if `motion.ts` never runs, so content is never
 trapped invisible. Keep that contract intact when adding animations.
+
+### Social card
+
+`public/og.png` (1200x630) is rendered from `docs/og-card.html`, which pulls the site's own
+self-hosted woff2 files over a local `dist/client` server. Regenerate it — and only then — when
+the name, role or palette changes; the header comment in that file has the command.
 
 ### Content collections
 

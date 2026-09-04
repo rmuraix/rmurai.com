@@ -12,7 +12,7 @@ const { command, title, count } = Astro.props;
 
 <header class="mb-[clamp(2.5rem,1.5rem+3vw,4rem)]" data-reveal>
 	<div class="flex items-baseline gap-[clamp(1rem,3vw,2rem)]">
-		<p class="mono prompt shrink-0">{command}</p>
+		<p class="mono prompt shrink-0"><span class="prompt-sigil" aria-hidden="true">$</span>{command}</p>
 		<span class="rule mt-[-0.35em] min-w-0 flex-1" aria-hidden="true"></span>
 		{count && <p class="mono shrink-0 text-ink-muted">{count}</p>}
 	</div>
