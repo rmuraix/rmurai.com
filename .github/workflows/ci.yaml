@@ -12,6 +12,6 @@ jobs:
     steps:
       - uses: actions/checkout@v7
       - name: Install pnpm
-        uses: pnpm/setup@v2
+        uses: pnpm/setup@v3
       - name: Build
         run: pnpm build
