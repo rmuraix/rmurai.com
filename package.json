@@ -16,10 +16,10 @@
 		"cf-typegen": "wrangler types"
 	},
 	"dependencies": {
-		"@astrojs/cloudflare": "^14.4.3",
+		"@astrojs/cloudflare": "^14.4.6",
 		"@astrojs/sitemap": "^3.7.4",
 		"@tailwindcss/vite": "^4.3.3",
-		"astro": "^7.4.4",
+		"astro": "^7.4.7",
 		"motion": "^14.9.0",
 		"tailwindcss": "^4.3.3"
 	},
