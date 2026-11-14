@@ -23,11 +23,13 @@ const icons: Record<Props["name"], { path: string; viewBox: string }> = {
 
 const { path, viewBox } = icons[name];
 const isStroke = name === "arrow";
+// Brand glyphs sit ~1px low next to mono text (line box includes descender space).
+const nudge = !isStroke && "-translate-y-px";
 ---
 
 <svg
 	viewBox={viewBox}
-	class={className}
+	class:list={[nudge, className]}
 	fill="none"
 	aria-hidden="true"
 	focusable="false"
