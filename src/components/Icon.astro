@@ -1,4 +1,6 @@
 ---
+import { siGithub, siGooglescholar } from "simple-icons";
+
 interface Props {
 	name: "github" | "linkedin" | "googleScholar" | "arrow";
 	class?: string;
@@ -6,18 +8,19 @@ interface Props {
 
 const { name, class: className } = Astro.props;
 
-const paths: Record<Props["name"], string> = {
-	github:
-		"M8 .9a7.1 7.1 0 0 0-2.25 13.84c.36.07.49-.15.49-.35v-1.2c-2.01.44-2.43-.85-2.43-.85-.32-.82-.79-1.04-.79-1.04-.65-.44.05-.43.05-.43.71.05 1.09.74 1.09.74.64 1.08 1.67.77 2.08.59.06-.46.25-.78.45-.96-1.6-.18-3.29-.79-3.29-3.55 0-.79.28-1.43.74-1.94-.07-.18-.32-.92.07-1.91 0 0 .6-.19 1.97.74A6.8 6.8 0 0 1 8 4.59c.61 0 1.23.08 1.81.23 1.37-.93 1.97-.74 1.97-.74.39.99.14 1.73.07 1.91.46.51.74 1.15.74 1.94 0 2.77-1.69 3.37-3.31 3.55.26.22.49.66.49 1.33v1.58c0 .2.13.42.5.35A7.1 7.1 0 0 0 8 .9Z",
-	linkedin:
-		"M3.57 5.12a1.03 1.03 0 1 1 0-2.06 1.03 1.03 0 0 1 0 2.06Zm.9 1.23H2.66v6.13h1.81V6.35Zm2.84 0H5.53v6.13h1.78V9.26c0-1.7 2.2-1.84 2.2 0v3.22h1.79V8.64c0-2.98-3.38-2.87-3.99-1.4V6.35Z",
-	googleScholar:
-		"M5.242 13.769L0 9.5 12 0l12 9.5-5.242 4.269C17.548 11.249 14.978 9.5 12 9.5c-2.977 0-5.548 1.748-6.758 4.269zM12 10a7 7 0 1 0 0 14 7 7 0 0 0 0-14z",
-	arrow: "M4.5 11.5 11.5 4.5M11.5 4.5H5.75M11.5 4.5v5.75",
+// Simple Icons glyphs use a 24px grid. LinkedIn is no longer shipped by
+// Simple Icons, so it stays hand-drawn on the 16px grid with the arrow.
+const icons: Record<Props["name"], { path: string; viewBox: string }> = {
+	github: { path: siGithub.path, viewBox: "0 0 24 24" },
+	googleScholar: { path: siGooglescholar.path, viewBox: "0 0 24 24" },
+	linkedin: {
+		path: "M3.57 5.12a1.03 1.03 0 1 1 0-2.06 1.03 1.03 0 0 1 0 2.06Zm.9 1.23H2.66v6.13h1.81V6.35Zm2.84 0H5.53v6.13h1.78V9.26c0-1.7 2.2-1.84 2.2 0v3.22h1.79V8.64c0-2.98-3.38-2.87-3.99-1.4V6.35Z",
+		viewBox: "0 0 16 16",
+	},
+	arrow: { path: "M4.5 11.5 11.5 4.5M11.5 4.5H5.75M11.5 4.5v5.75", viewBox: "0 0 16 16" },
 };
 
-// Simple Icons glyphs use a 24px grid; the rest use 16px.
-const viewBox = name === "googleScholar" ? "0 0 24 24" : "0 0 16 16";
+const { path, viewBox } = icons[name];
 const isStroke = name === "arrow";
 ---
 
@@ -29,7 +32,7 @@ const isStroke = name === "arrow";
 	focusable="false"
 >
 	<path
-		d={paths[name]}
+		d={path}
 		fill={isStroke ? 'none' : 'currentColor'}
 		stroke={isStroke ? 'currentColor' : undefined}
 		stroke-width={isStroke ? 1.4 : undefined}

@@ -181,6 +181,9 @@ importers:
       motion:
         specifier: ^14.9.0
         version: 14.9.0
+      simple-icons:
+        specifier: ^16.37.0
+        version: 16.37.0
       tailwindcss:
         specifier: ^4.3.3
         version: 4.3.3
@@ -1909,6 +1912,10 @@ packages:
   shiki@4.5.0:
     resolution: {integrity: sha512-OcRW72ngQvc+MSVWBRIovC/BTW589iUE/Vxav7VeM4RcY9MUjqB+IR6ILG1k9nuW6LiG/nct9uma4/MBtnZbmQ==}
     engines: {node: '>=20'}
+
+  simple-icons@16.37.0:
+    resolution: {integrity: sha512-8mCJIhpMYOL9g13GW59EiL3sVXJnTEKGCTZFaekl9UQ3Qo0SwVjnLaJ82QiaH8BKBdouEDzrHMXIWh8cBIy48A==}
+    engines: {node: '>=0.12.18'}
 
   sisteransi@1.0.5:
     resolution: {integrity: sha512-bLGGlR1QxBcynn2d5YmDX4MGjlZvy2MRBDRNHLJ8VI6l6+9FUiyTFNJ0IveOSP0bcXgVDPRcfGqA0pjaqUpfVg==}
@@ -3954,6 +3961,8 @@ snapshots:
       '@shikijs/types': 4.5.0
       '@shikijs/vscode-textmate': 10.0.2
       '@types/hast': 3.0.5
+
+  simple-icons@16.37.0: {}
 
   sisteransi@1.0.5: {}
 
