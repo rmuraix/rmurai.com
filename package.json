@@ -3,7 +3,10 @@
 	"type": "module",
 	"version": "0.0.1",
 	"devEngines": {
-		"runtime": { "name": "node", "version": "^24.22.1"}
+		"runtime": {
+			"name": "node",
+			"version": "^24.22.1"
+		}
 	},
 	"packageManager": "pnpm@12.16.1",
 	"scripts": {
@@ -21,6 +24,7 @@
 		"@tailwindcss/vite": "^4.3.3",
 		"astro": "^7.4.7",
 		"motion": "^14.9.0",
+		"simple-icons": "^16.37.0",
 		"tailwindcss": "^4.3.3"
 	},
 	"devDependencies": {
