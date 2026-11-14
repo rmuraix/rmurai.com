@@ -19,7 +19,7 @@ export const socialLinks: SocialLink[] = [
   { label: "LinkedIn", href: "https://www.linkedin.com/in/rmurai/", icon: "linkedin" },
   {
     label: "Google Scholar",
-    href: "https://scholar.google.com/citations?user=dyLFMLoAAAAJ&hl=ja",
+    href: "https://scholar.google.com/citations?user=dyLFMLoAAAAJ",
     icon: "googleScholar",
   },
 ];
