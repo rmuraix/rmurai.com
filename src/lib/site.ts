@@ -1,7 +1,7 @@
 export interface SocialLink {
   label: string;
   href: string;
-  icon: "github" | "linkedin" | "orcid";
+  icon: "github" | "linkedin" | "googleScholar";
 }
 
 export const site = {
@@ -18,9 +18,9 @@ export const socialLinks: SocialLink[] = [
   { label: "GitHub", href: "https://github.com/rmuraix", icon: "github" },
   { label: "LinkedIn", href: "https://www.linkedin.com/in/rmurai/", icon: "linkedin" },
   {
-    label: "ORCID",
-    href: "https://orcid.org/0009-0007-0248-9267",
-    icon: "orcid",
+    label: "Google Scholar",
+    href: "https://scholar.google.com/citations?user=dyLFMLoAAAAJ&hl=ja",
+    icon: "googleScholar",
   },
 ];
 
