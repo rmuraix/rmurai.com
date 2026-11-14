@@ -9,13 +9,14 @@ interface Props {
 const { name, class: className } = Astro.props;
 
 // Simple Icons glyphs use a 24px grid. LinkedIn is no longer shipped by
-// Simple Icons, so it stays hand-drawn on the 16px grid with the arrow.
+// Simple Icons, so it stays hand-drawn on the 16px grid, cropped to the glyph so it
+// matches the others in size.
 const icons: Record<Props["name"], { path: string; viewBox: string }> = {
 	github: { path: siGithub.path, viewBox: "0 0 24 24" },
 	googleScholar: { path: siGooglescholar.path, viewBox: "0 0 24 24" },
 	linkedin: {
 		path: "M3.57 5.12a1.03 1.03 0 1 1 0-2.06 1.03 1.03 0 0 1 0 2.06Zm.9 1.23H2.66v6.13h1.81V6.35Zm2.84 0H5.53v6.13h1.78V9.26c0-1.7 2.2-1.84 2.2 0v3.22h1.79V8.64c0-2.98-3.38-2.87-3.99-1.4V6.35Z",
-		viewBox: "0 0 16 16",
+		viewBox: "1.8 2.6 10.4 10.4",
 	},
 	arrow: { path: "M4.5 11.5 11.5 4.5M11.5 4.5H5.75M11.5 4.5v5.75", viewBox: "0 0 16 16" },
 };
