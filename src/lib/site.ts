@@ -27,5 +27,6 @@ export const socialLinks: SocialLink[] = [
 export const sections = [
   { id: "index", label: "index" },
   { id: "publications", label: "publications" },
+  { id: "awards", label: "awards" },
   { id: "blog", label: "blog" },
 ] as const;

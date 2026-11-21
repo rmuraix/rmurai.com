@@ -1,5 +1,5 @@
 import { glob } from 'astro/loaders';
-import { defineCollection } from 'astro:content';
+import { defineCollection, reference } from 'astro:content';
 import { z } from 'astro/zod';
 
 const publications = defineCollection({
@@ -16,4 +16,17 @@ const publications = defineCollection({
   }),
 });
 
-export const collections = { publications };
+const awards = defineCollection({
+  loader: glob({ base: './src/content/awards', pattern: '**/*.yaml' }),
+  schema: z.object({
+    title: z.string(),
+    event: z.string(),
+    year: z.number().int(),
+    /** The awarded paper, when it is listed under publications. */
+    publication: reference('publications').optional(),
+    /** Announcement or proceedings page, when one exists. */
+    url: z.url().optional(),
+  }),
+});
+
+export const collections = { publications, awards };
