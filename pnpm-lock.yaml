@@ -179,8 +179,8 @@ importers:
         specifier: ^7.4.7
         version: 7.4.7(@types/node@24.12.0)(esbuild@0.28.2)(jiti@2.7.0)(yaml@2.9.1)
       motion:
-        specifier: ^14.9.0
-        version: 14.9.0
+        specifier: ^14.9.1
+        version: 14.14.0
       simple-icons:
         specifier: ^16.37.0
         version: 16.37.0
@@ -1451,8 +1451,8 @@ packages:
     resolution: {integrity: sha512-Wp1zXWPVUPBmfoa3Cqc9ctaKuzKAV6uLstRqlR56kSjplf5uAce+qeyYym7F+PHbGTk+tCEdkCW6RD7DX/gBZw==}
     engines: {node: '>=20'}
 
-  framer-motion@14.9.0:
-    resolution: {integrity: sha512-g1hZu8WoTwgsoVAaqEEcefhvR03cKGtkmrKaRrWpXhnM3LGR8jl1u2qyJ1PMVlO7LKQHE8TTRQYUlMmnrY4L+g==}
+  framer-motion@14.14.0:
+    resolution: {integrity: sha512-fidRX0VzkZdA9OovFiBSzJtt9/jLcJpna78Z+KCqQQZIWoIpN3tOhEXAhhAw/FObUUh+o3Y18yx1F4BP0mVJ8Q==}
     peerDependencies:
       react: ^18.0.0 || ^19.0.0
       react-dom: ^18.0.0 || ^19.0.0
@@ -1733,14 +1733,14 @@ packages:
       kerberos:
         optional: true
 
-  motion-dom@14.9.0:
-    resolution: {integrity: sha512-wGjKbNDMHd75aLStkxLCKZ+T8/wusZHklmNLK1Ak68UrdBt2X8I4yweYR/0WonxGnBsw6oloDTIV8pN+UTvzzA==}
+  motion-dom@14.14.0:
+    resolution: {integrity: sha512-IAxcKhYkuQA2W0Tlx1AvVgImfqEoF3/t3IovbPQJlYkefmGsmrXjn967lMII5VmFmLpQEab4+ZkHo/ijJ4Esig==}
 
   motion-utils@14.7.0:
     resolution: {integrity: sha512-woO0/Nb7ys75f94fjvQi/6leiHGvZUYkeHUPEZ3vxsV+9OpEVhkxp01x8MlRwX0zt31EqgXsKDAoBoJLC148Tw==}
 
-  motion@14.9.0:
-    resolution: {integrity: sha512-Oc+jjq/AyhwsnEUaAq2xEu/SsfKTphgsXqoxddTSLzgTdXZc6FwHcp9RLGSECccTykN1/p3gWUN4kMJAamm+1g==}
+  motion@14.14.0:
+    resolution: {integrity: sha512-a306U6sV5VKq1abtzKiinB+UQjiY88jrsvQzWORP3WPv/DFANyoYVlPbdnmJPMEbusyPXB4GyQJVANaq/pSIYQ==}
     peerDependencies:
       react: ^18.0.0 || ^19.0.0
       react-dom: ^18.0.0 || ^19.0.0
@@ -3518,9 +3518,9 @@ snapshots:
     dependencies:
       tiny-inflate: 1.0.3
 
-  framer-motion@14.9.0:
+  framer-motion@14.14.0:
     dependencies:
-      motion-dom: 14.9.0
+      motion-dom: 14.14.0
       motion-utils: 14.7.0
       tslib: 2.8.1
 
@@ -3764,15 +3764,15 @@ snapshots:
       - bufferutil
       - utf-8-validate
 
-  motion-dom@14.9.0:
+  motion-dom@14.14.0:
     dependencies:
       motion-utils: 14.7.0
 
   motion-utils@14.7.0: {}
 
-  motion@14.9.0:
+  motion@14.14.0:
     dependencies:
-      framer-motion: 14.9.0
+      framer-motion: 14.14.0
       tslib: 2.8.1
 
   mrmime@2.0.1: {}
