@@ -8,7 +8,7 @@
 			"version": "^24.22.3"
 		}
 	},
-	"packageManager": "pnpm@12.16.1",
+	"packageManager": "pnpm@12.23.0",
 	"scripts": {
 		"dev": "astro dev",
 		"build": "astro build",
