@@ -179,7 +179,7 @@ importers:
         specifier: ^7.4.13
         version: 7.4.13(@types/node@24.12.0)(esbuild@0.28.2)(jiti@2.7.0)(yaml@2.9.1)
       motion:
-        specifier: ^14.9.1
+        specifier: ^14.14.0
         version: 14.14.0
       simple-icons:
         specifier: ^16.37.0
