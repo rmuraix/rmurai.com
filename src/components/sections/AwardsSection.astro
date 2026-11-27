@@ -49,9 +49,9 @@ const count = awards.length;
 									)}
 								</h3>
 
-								{publication && (
+								{(publication?.data.title ?? data.paperTitle) && (
 									<p class="mt-3 text-[0.9375rem] leading-[1.7] text-ink-muted">
-										{publication.data.title}
+										{publication?.data.title ?? data.paperTitle}
 									</p>
 								)}
 
