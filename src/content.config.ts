@@ -24,6 +24,8 @@ const awards = defineCollection({
     year: z.number().int(),
     /** The awarded paper, when it is listed under publications. */
     publication: reference('publications').optional(),
+    /** The awarded paper's title, when it is not listed under publications. */
+    paperTitle: z.string().optional(),
     /** Announcement or proceedings page, when one exists. */
     url: z.url().optional(),
   }),
